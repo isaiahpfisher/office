@@ -9,6 +9,7 @@ import {
 import { resolveUrl } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { type ComponentPropsWithoutRef } from 'react';
+import AppearanceToggleDropdown from './appearance-dropdown';
 
 export function NavFooter({
     items,
@@ -46,6 +47,9 @@ export function NavFooter({
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     ))}
+                    <SidebarMenuItem key="appearance">
+                        <AppearanceToggleDropdown className="w-full" />
+                    </SidebarMenuItem>
                 </SidebarMenu>
             </SidebarGroupContent>
         </SidebarGroup>

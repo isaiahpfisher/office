@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -8,6 +7,7 @@ import {
 import { useAppearance } from '@/hooks/use-appearance';
 import { Monitor, Moon, Sun } from 'lucide-react';
 import { HTMLAttributes } from 'react';
+import { SidebarMenuButton } from './ui/sidebar';
 
 export default function AppearanceToggleDropdown({
     className = '',
@@ -26,18 +26,26 @@ export default function AppearanceToggleDropdown({
         }
     };
 
+    const getCurrentLabel = () => {
+        switch (appearance) {
+            case 'dark':
+                return 'Dark';
+            case 'light':
+                return 'Light';
+            default:
+                return 'System';
+        }
+    };
+
     return (
         <div className={className} {...props}>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-9 w-9 rounded-md"
-                    >
+                    <SidebarMenuButton>
                         {getCurrentIcon()}
+                        {getCurrentLabel()}
                         <span className="sr-only">Toggle theme</span>
-                    </Button>
+                    </SidebarMenuButton>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                     <DropdownMenuItem onClick={() => updateAppearance('light')}>
