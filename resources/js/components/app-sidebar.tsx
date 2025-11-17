@@ -9,17 +9,17 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { home } from '@/routes';
+import { chat } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { GithubIcon, GlobeIcon, HomeIcon } from 'lucide-react';
+import { GithubIcon, GlobeIcon, MessagesSquareIcon } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Home',
-        href: home(),
-        icon: HomeIcon,
+        title: 'Chat',
+        href: chat(),
+        icon: MessagesSquareIcon,
     },
 ];
 
@@ -43,7 +43,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={home()} prefetch>
+                            <Link href={chat()} prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>
