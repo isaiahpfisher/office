@@ -12,7 +12,23 @@ import {
 import { chat } from '@/routes';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { GithubIcon, GlobeIcon, MessagesSquareIcon } from 'lucide-react';
+import {
+    ClapperboardIcon,
+    DramaIcon,
+    FilmIcon,
+    GithubIcon,
+    GlobeIcon,
+    HeartHandshakeIcon,
+    LaughIcon,
+    LayersIcon,
+    MapPinHouseIcon,
+    MessageCircleXIcon,
+    MessagesSquareIcon,
+    PopcornIcon,
+    QuoteIcon,
+    UserCheckIcon,
+    UsersIcon,
+} from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
@@ -20,6 +36,66 @@ const mainNavItems: NavItem[] = [
         title: 'Chat',
         href: chat(),
         icon: MessagesSquareIcon,
+    },
+    {
+        title: 'Characters',
+        href: '/todo',
+        icon: UsersIcon,
+    },
+    {
+        title: 'Roles',
+        href: '/todo',
+        icon: UserCheckIcon,
+    },
+    {
+        title: 'Actors',
+        href: '/todo',
+        icon: DramaIcon,
+    },
+    {
+        title: 'Seasons',
+        href: '/todo',
+        icon: FilmIcon,
+    },
+    {
+        title: 'Episodes',
+        href: '/todo',
+        icon: ClapperboardIcon,
+    },
+    {
+        title: 'Departments',
+        href: '/todo',
+        icon: LayersIcon,
+    },
+    {
+        title: 'Branches',
+        href: '/todo',
+        icon: MapPinHouseIcon,
+    },
+    {
+        title: 'Pranks',
+        href: '/todo',
+        icon: LaughIcon,
+    },
+    {
+        title: 'Relationships',
+        href: '/todo',
+        icon: HeartHandshakeIcon,
+    },
+    {
+        title: 'Quotes',
+        href: '/todo',
+        icon: QuoteIcon,
+    },
+    {
+        title: 'Things She Said',
+        href: '/todo',
+        icon: MessageCircleXIcon,
+    },
+    {
+        title: 'Cold Opens',
+        href: '/todo',
+        icon: PopcornIcon,
     },
 ];
 
