@@ -4,6 +4,7 @@ import AppLayout from '@/layouts/app-layout';
 import { chat } from '@/routes';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Chat',
@@ -15,7 +16,7 @@ export default function Chat() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Chat" />
-            <div className="flex h-full flex-col justify-between p-4">
+            <div className="flex h-full flex-col justify-between p-6">
                 <ChatEmpty />
                 <ChatInput />
             </div>

@@ -1,5 +1,6 @@
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { SidebarTrigger } from '@/components/ui/sidebar';
+import { randomNumber } from '@/lib/utils';
 import { type BreadcrumbItem as BreadcrumbItemType } from '@/types';
 
 export function AppSidebarHeader({
@@ -15,7 +16,9 @@ export function AppSidebarHeader({
                     <Breadcrumbs breadcrumbs={breadcrumbs} />
                 </div>
                 <p className="text-sm text-muted-foreground">
-                    Isaiah Fisher & Justin Walraven
+                    {randomNumber(0, 1)
+                        ? 'Isaiah Fisher & Justin Walraven'
+                        : 'Justin Walraven & Isaiah Fisher'}
                 </p>
             </div>
         </header>

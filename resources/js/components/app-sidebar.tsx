@@ -10,6 +10,9 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { chat } from '@/routes';
+import characters from '@/routes/characters';
+import departments from '@/routes/departments';
+import seasons from '@/routes/seasons';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
@@ -39,7 +42,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Characters',
-        href: '/todo',
+        href: characters.index(),
         icon: UsersIcon,
     },
     {
@@ -54,7 +57,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Seasons',
-        href: '/todo',
+        href: seasons.index(),
         icon: FilmIcon,
     },
     {
@@ -64,7 +67,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Departments',
-        href: '/todo',
+        href: departments.index(),
         icon: LayersIcon,
     },
     {
