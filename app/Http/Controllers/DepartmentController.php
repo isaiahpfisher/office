@@ -18,14 +18,22 @@ class DepartmentController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-        //
+        return Inertia::render("departments/create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        //
+        $valid = $request->validate([
+            'title' => 'required|min:5',
+        ]);
+
+        Department::create([
+            'title' => $valid['title'],
+        ]);
+
+        return redirect()->route('departments.index');
     }
 
     /**
