@@ -65,6 +65,9 @@ export default function CharactersIndex({ data }: { data: Character[] }) {
                     columns={columns}
                     data={data}
                     createRoute={characters.create().url}
+                    getEditRoute={(id: string) =>
+                        characters.edit(parseInt(id)).url
+                    }
                 />
             </div>
         </AppLayout>

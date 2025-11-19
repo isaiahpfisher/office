@@ -35,7 +35,7 @@ export function DataTableActionsCell({
                         </Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                        className="text-destructive-foreground hover:!text-destructive-foreground"
+                        className="w-full text-destructive-foreground hover:text-destructive-foreground!"
                         asChild
                     >
                         <Link href={deleteRoute} method="delete">

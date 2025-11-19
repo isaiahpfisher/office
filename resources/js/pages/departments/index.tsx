@@ -44,7 +44,6 @@ const columns: ColumnDef<Department>[] = [
 ];
 
 export default function DepartmentsIndex({ data }: { data: Department[] }) {
-    console.log(data);
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Departments" />
@@ -55,6 +54,9 @@ export default function DepartmentsIndex({ data }: { data: Department[] }) {
                     columns={columns}
                     data={data}
                     createRoute={departments.create().url}
+                    getEditRoute={(id: string) =>
+                        departments.edit(parseInt(id)).url
+                    }
                 />
             </div>
         </AppLayout>

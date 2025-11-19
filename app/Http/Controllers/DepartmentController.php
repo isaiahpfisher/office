@@ -47,20 +47,29 @@ class DepartmentController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Department $department) {
-        //
+        return Inertia::render('departments/edit', ['department' => $department]);
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Department $department) {
-        //
+        $valid = $request->validate([
+            'title' => 'required|min:5',
+        ]);
+
+        $department->update([
+            'title' => $valid['title'],
+        ]);
+
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Department $department) {
-        //
+        $department->delete();
+        return redirect()->route('departments.index');
     }
 }

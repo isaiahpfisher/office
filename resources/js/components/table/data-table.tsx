@@ -28,7 +28,7 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table';
-import { Link } from '@inertiajs/react';
+import { Link, router } from '@inertiajs/react';
 import { ChevronDown, PlusIcon } from 'lucide-react';
 import { useState } from 'react';
 
@@ -38,6 +38,7 @@ interface DataTableProps<TData, TValue> {
     title: string;
     description?: string;
     createRoute: string;
+    getEditRoute: (id: string) => string;
 }
 
 export function DataTable<TData, TValue>({
@@ -46,6 +47,7 @@ export function DataTable<TData, TValue>({
     title,
     description,
     createRoute,
+    getEditRoute,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [globalFilter, setGlobalFilter] = useState('');
@@ -54,8 +56,14 @@ export function DataTable<TData, TValue>({
     );
     const [rowSelection, setRowSelection] = useState({});
 
+    const sortDataByCreatedAt = (a, b) => {
+        return (
+            new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+        );
+    };
+
     const table = useReactTable({
-        data,
+        data: data.sort(sortDataByCreatedAt),
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
@@ -148,6 +156,12 @@ export function DataTable<TData, TValue>({
                             table.getRowModel().rows.map((row) => (
                                 <TableRow
                                     key={row.id}
+                                    className="cursor-pointer"
+                                    onClick={() =>
+                                        router.get(
+                                            getEditRoute(row.original.id),
+                                        )
+                                    }
                                     data-state={
                                         row.getIsSelected() && 'selected'
                                     }

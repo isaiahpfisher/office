@@ -10,12 +10,14 @@ import {
     CardHeader,
     CardTitle,
 } from '@/components/ui/card';
+
 import {
     Field,
     FieldDescription,
     FieldError,
     FieldLabel,
 } from '@/components/ui/field';
+
 import { Input } from '@/components/ui/input';
 import {
     InputGroup,
@@ -23,6 +25,14 @@ import {
     InputGroupText,
     InputGroupTextarea,
 } from '@/components/ui/input-group';
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
 
 // -------------------------------
 // TYPES
@@ -46,6 +56,15 @@ export type AutoFormField =
           rows?: number;
           maxChars?: number;
           description?: string;
+      }
+    | {
+          type: 'select';
+          name: string;
+          label: string;
+          colSpan?: number;
+          placeholder?: string;
+          description?: string;
+          options: { label: string; value: string }[];
       };
 
 export interface AutoFormConfig {
@@ -70,6 +89,10 @@ const colSpans = {
     7: 'col-span-7',
     8: 'col-span-8',
 };
+
+// ======================================================
+// AutoForm Component
+// ======================================================
 
 export function AutoForm({
     title,
@@ -112,7 +135,7 @@ export function AutoForm({
                         form.handleSubmit();
                     }}
                 >
-                    {/* Grid wrapper */}
+                    {/* Fields Grid */}
                     <div
                         className="grid gap-6"
                         style={{
@@ -207,6 +230,53 @@ export function AutoForm({
                                                             </InputGroupAddon>
                                                         )}
                                                     </InputGroup>
+                                                )}
+
+                                                {/* SELECT FIELD */}
+                                                {field.type === 'select' && (
+                                                    <Select
+                                                        value={
+                                                            fieldApi.state.value
+                                                        }
+                                                        onValueChange={(val) =>
+                                                            fieldApi.handleChange(
+                                                                val,
+                                                            )
+                                                        }
+                                                    >
+                                                        <SelectTrigger
+                                                            id={field.name}
+                                                            aria-invalid={
+                                                                isInvalid
+                                                            }
+                                                        >
+                                                            <SelectValue
+                                                                placeholder={
+                                                                    field.placeholder ??
+                                                                    'Select...'
+                                                                }
+                                                            />
+                                                        </SelectTrigger>
+
+                                                        <SelectContent>
+                                                            {field.options.map(
+                                                                (opt) => (
+                                                                    <SelectItem
+                                                                        key={
+                                                                            opt.value
+                                                                        }
+                                                                        value={
+                                                                            opt.value
+                                                                        }
+                                                                    >
+                                                                        {
+                                                                            opt.label
+                                                                        }
+                                                                    </SelectItem>
+                                                                ),
+                                                            )}
+                                                        </SelectContent>
+                                                    </Select>
                                                 )}
 
                                                 {field.description && (
