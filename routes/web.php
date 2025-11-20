@@ -7,6 +7,7 @@ use App\Http\Controllers\ColdOpenController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\PrankController;
+use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SeasonController;
 use App\Http\Controllers\ThingSheSaidController;
@@ -109,4 +110,13 @@ Route::controller(ThingSheSaidController::class)->group(function () {
     Route::post('/things-she-said', 'store')->name('things-she-said.store');
     Route::patch('/things-she-said/{thingSheSaid}', 'update')->name('things-she-said.update');
     Route::delete('/things-she-said/{thingSheSaid}', 'destroy')->name('things-she-said.destroy');
+});
+
+Route::controller(QuoteController::class)->group(function () {
+    Route::get('/quotes', 'index')->name('quotes.index');
+    Route::get('/quotes/create', 'create')->name('quotes.create');
+    Route::get('/quotes/{quote}', 'edit')->name('quotes.edit');
+    Route::post('/quotes', 'store')->name('quotes.store');
+    Route::patch('/quotes/{quote}', 'update')->name('quotes.update');
+    Route::delete('/quotes/{quote}', 'destroy')->name('quotes.destroy');
 });

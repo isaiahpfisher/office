@@ -68,3 +68,11 @@ export type ThingSheSaid = {
     character_id: string;
     character: Character;
 } & Base;
+
+export type Quote = {
+    quote: string;
+    episode_id: string;
+    episode: Episode;
+    character_id: string;
+    character: Character;
+} & Base;

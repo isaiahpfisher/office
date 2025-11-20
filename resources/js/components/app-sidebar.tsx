@@ -17,6 +17,7 @@ import coldOpens from '@/routes/cold-opens';
 import departments from '@/routes/departments';
 import episodes from '@/routes/episodes';
 import pranks from '@/routes/pranks';
+import quotes from '@/routes/quotes';
 import roles from '@/routes/roles';
 import seasons from '@/routes/seasons';
 import thingsSheSaid from '@/routes/things-she-said';
@@ -94,7 +95,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Quotes',
-        href: '/todo',
+        href: quotes.index(),
         icon: QuoteIcon,
     },
     {
