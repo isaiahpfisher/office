@@ -19,6 +19,7 @@ import episodes from '@/routes/episodes';
 import pranks from '@/routes/pranks';
 import roles from '@/routes/roles';
 import seasons from '@/routes/seasons';
+import thingsSheSaid from '@/routes/things-she-said';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import {
@@ -98,7 +99,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Things She Said',
-        href: '/todo',
+        href: thingsSheSaid.index(),
         icon: MessageCircleXIcon,
     },
     {

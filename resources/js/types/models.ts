@@ -60,3 +60,11 @@ export type Prank = {
     episode_id: string;
     episode: Episode;
 } & Base;
+
+export type ThingSheSaid = {
+    saying: string;
+    episode_id: string;
+    episode: Episode;
+    character_id: string;
+    character: Character;
+} & Base;

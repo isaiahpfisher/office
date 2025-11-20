@@ -9,6 +9,7 @@ use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\PrankController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SeasonController;
+use App\Http\Controllers\ThingSheSaidController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -65,15 +66,6 @@ Route::controller(EpisodeController::class)->group(function () {
     Route::delete('/episodes/{episode}', 'destroy')->name('episodes.destroy');
 });
 
-Route::controller(ColdOpenController::class)->group(function () {
-    Route::get('/cold-opens', 'index')->name('cold-opens.index');
-    Route::get('/cold-opens/create', 'create')->name('cold-opens.create');
-    Route::get('/cold-opens/{coldOpen}', 'edit')->name('cold-opens.edit');
-    Route::post('/cold-opens', 'store')->name('cold-opens.store');
-    Route::patch('/cold-opens/{coldOpen}', 'update')->name('cold-opens.update');
-    Route::delete('/cold-opens/{coldOpen}', 'destroy')->name('cold-opens.destroy');
-});
-
 Route::controller(DepartmentController::class)->group(function () {
     Route::get('/departments', 'index')->name('departments.index');
     Route::get('/departments/create', 'create')->name('departments.create');
@@ -99,4 +91,22 @@ Route::controller(PrankController::class)->group(function () {
     Route::post('/pranks', 'store')->name('pranks.store');
     Route::patch('/pranks/{prank}', 'update')->name('pranks.update');
     Route::delete('/pranks/{prank}', 'destroy')->name('pranks.destroy');
+});
+
+Route::controller(ColdOpenController::class)->group(function () {
+    Route::get('/cold-opens', 'index')->name('cold-opens.index');
+    Route::get('/cold-opens/create', 'create')->name('cold-opens.create');
+    Route::get('/cold-opens/{coldOpen}', 'edit')->name('cold-opens.edit');
+    Route::post('/cold-opens', 'store')->name('cold-opens.store');
+    Route::patch('/cold-opens/{coldOpen}', 'update')->name('cold-opens.update');
+    Route::delete('/cold-opens/{coldOpen}', 'destroy')->name('cold-opens.destroy');
+});
+
+Route::controller(ThingSheSaidController::class)->group(function () {
+    Route::get('/things-she-said', 'index')->name('things-she-said.index');
+    Route::get('/things-she-said/create', 'create')->name('things-she-said.create');
+    Route::get('/things-she-said/{thingSheSaid}', 'edit')->name('things-she-said.edit');
+    Route::post('/things-she-said', 'store')->name('things-she-said.store');
+    Route::patch('/things-she-said/{thingSheSaid}', 'update')->name('things-she-said.update');
+    Route::delete('/things-she-said/{thingSheSaid}', 'destroy')->name('things-she-said.destroy');
 });

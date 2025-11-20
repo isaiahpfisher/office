@@ -3,30 +3,31 @@ import { DataTableColumnHeader } from '@/components/table/column-header';
 import { DataTable } from '@/components/table/data-table';
 import { DataTableLinkCell } from '@/components/table/link-cell';
 import AppLayout from '@/layouts/app-layout';
-import coldOpens from '@/routes/cold-opens';
+import characters from '@/routes/characters';
 import episodes from '@/routes/episodes';
+import thingsSheSaid from '@/routes/things-she-said';
 import { type BreadcrumbItem } from '@/types';
-import { ColdOpen } from '@/types/models';
+import { ThingSheSaid } from '@/types/models';
 import { Head } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
-import { ClapperboardIcon } from 'lucide-react';
+import { ClapperboardIcon, UsersIcon } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Cold Opens',
-        href: coldOpens.index().url,
+        title: 'Things She Said',
+        href: thingsSheSaid.index().url,
     },
 ];
 
-const columns: ColumnDef<ColdOpen>[] = [
+const columns: ColumnDef<ThingSheSaid>[] = [
     {
-        accessorKey: 'description',
+        accessorKey: 'saying',
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Description" />
+            <DataTableColumnHeader column={column} title="Saying" />
         ),
         cell: ({ row }) => (
             <div className="line-clamp-2 max-w-lg text-wrap">
-                {row.original.description}
+                {row.original.saying}
             </div>
         ),
     },
@@ -44,28 +45,41 @@ const columns: ColumnDef<ColdOpen>[] = [
         ),
     },
     {
+        accessorKey: 'character',
+        header: ({ column }) => (
+            <DataTableColumnHeader column={column} title="Character" />
+        ),
+        cell: ({ row }) => (
+            <DataTableLinkCell
+                label={`${row.original.character.first_name} ${row.original.character.last_name}`}
+                editRoute={characters.edit(row.original.character.id).url}
+                icon={<UsersIcon />}
+            />
+        ),
+    },
+    {
         id: 'actions',
         cell: ({ row }) => (
             <DataTableActionsCell
-                editRoute={coldOpens.edit(row.original.id).url}
-                deleteRoute={coldOpens.destroy(row.original.id).url}
+                editRoute={thingsSheSaid.edit(row.original.id).url}
+                deleteRoute={thingsSheSaid.destroy(row.original.id).url}
             />
         ),
     },
 ];
 
-export default function ColdOpensIndex({ data }: { data: ColdOpen[] }) {
+export default function ThingsSheSaidIndex({ data }: { data: ThingSheSaid[] }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Cold Opens" />
+            <Head title="Things She Said" />
             <div className="h-full p-6">
                 <DataTable
-                    title="Cold Opens"
-                    description="Browse cold opens from the show."
+                    title="Things She Said"
+                    description="Browse things she said from the show."
                     columns={columns}
                     data={data}
-                    createRoute={coldOpens.create().url}
-                    getEditRoute={(id: number) => coldOpens.edit(id).url}
+                    createRoute={thingsSheSaid.create().url}
+                    getEditRoute={(id: number) => thingsSheSaid.edit(id).url}
                 />
             </div>
         </AppLayout>

@@ -3,7 +3,7 @@ import { DataTableColumnHeader } from '@/components/table/column-header';
 import { DataTable } from '@/components/table/data-table';
 import { DataTableLinkCell } from '@/components/table/link-cell';
 import AppLayout from '@/layouts/app-layout';
-import characters from '@/routes/characters';
+import episodes from '@/routes/episodes';
 import pranks from '@/routes/pranks';
 import { type BreadcrumbItem } from '@/types';
 import { Prank } from '@/types/models';
@@ -38,7 +38,7 @@ const columns: ColumnDef<Prank>[] = [
         cell: ({ row }) => (
             <DataTableLinkCell
                 label={`${row.original.episode.title}`}
-                editRoute={characters.edit(row.original.episode.id).url}
+                editRoute={episodes.edit(row.original.episode.id).url}
                 icon={<ClapperboardIcon />}
             />
         ),
