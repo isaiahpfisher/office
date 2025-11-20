@@ -4,10 +4,6 @@ interface Base {
     updated_at: string;
 }
 
-export type Department = {
-    title: string;
-} & Base;
-
 export type Actor = {
     first_name: string;
     last_name: string;
@@ -49,4 +45,12 @@ export type ColdOpen = {
     description: string;
     episode_id: string;
     episode: Episode;
+} & Base;
+
+export type Department = {
+    title: string;
+} & Base;
+
+export type Branch = {
+    city: string;
 } & Base;

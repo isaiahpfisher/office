@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActorController;
+use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EpisodeController;
@@ -16,16 +17,6 @@ Route::get('/', function () {
 Route::get('/characters', function () {
     return Inertia::render('characters/index');
 })->name('characters.index');
-
-
-Route::controller(DepartmentController::class)->group(function () {
-    Route::get('/departments', 'index')->name('departments.index');
-    Route::get('/departments/create', 'create')->name('departments.create');
-    Route::get('/departments/{department}', 'edit')->name('departments.edit');
-    Route::post('/departments', 'store')->name('departments.store');
-    Route::patch('/departments/{department}', 'update')->name('departments.update');
-    Route::delete('/departments/{department}', 'destroy')->name('departments.destroy');
-});
 
 Route::controller(ActorController::class)->group(function () {
     Route::get('/actors', 'index')->name('actors.index');
@@ -79,4 +70,22 @@ Route::controller(EpisodeController::class)->group(function () {
     Route::post('/cold-opens', 'store')->name('cold-opens.store');
     Route::patch('/cold-opens/{coldOpen}', 'update')->name('cold-opens.update');
     Route::delete('/cold-opens/{coldOpen}', 'destroy')->name('cold-opens.destroy');
+});
+
+Route::controller(DepartmentController::class)->group(function () {
+    Route::get('/departments', 'index')->name('departments.index');
+    Route::get('/departments/create', 'create')->name('departments.create');
+    Route::get('/departments/{department}', 'edit')->name('departments.edit');
+    Route::post('/departments', 'store')->name('departments.store');
+    Route::patch('/departments/{department}', 'update')->name('departments.update');
+    Route::delete('/departments/{department}', 'destroy')->name('departments.destroy');
+});
+
+Route::controller(BranchController::class)->group(function () {
+    Route::get('/branches', 'index')->name('branches.index');
+    Route::get('/branches/create', 'create')->name('branches.create');
+    Route::get('/branches/{branch}', 'edit')->name('branches.edit');
+    Route::post('/branches', 'store')->name('branches.store');
+    Route::patch('/branches/{branch}', 'update')->name('branches.update');
+    Route::delete('/branches/{branch}', 'destroy')->name('branches.destroy');
 });

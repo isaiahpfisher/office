@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/sidebar';
 import { chat } from '@/routes';
 import actors from '@/routes/actors';
+import branches from '@/routes/branches';
 import characters from '@/routes/characters';
 import departments from '@/routes/departments';
 import episodes from '@/routes/episodes';
@@ -75,7 +76,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Branches',
-        href: '/todo',
+        href: branches.index(),
         icon: MapPinHouseIcon,
     },
     {

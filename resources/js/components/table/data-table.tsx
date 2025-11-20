@@ -5,6 +5,7 @@ import {
     getFilteredRowModel,
     getPaginationRowModel,
     getSortedRowModel,
+    PaginationState,
     SortingState,
     useReactTable,
     VisibilityState,
@@ -51,6 +52,10 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [globalFilter, setGlobalFilter] = useState('');
+    const [pagination, setPagination] = useState<PaginationState>({
+        pageIndex: 0,
+        pageSize: 10,
+    });
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
         {},
     );
@@ -67,6 +72,7 @@ export function DataTable<TData, TValue>({
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         onSortingChange: setSorting,
+        onPaginationChange: setPagination,
         getSortedRowModel: getSortedRowModel(),
         onGlobalFilterChange: setGlobalFilter,
         getFilteredRowModel: getFilteredRowModel(),
@@ -75,6 +81,7 @@ export function DataTable<TData, TValue>({
             sorting,
             globalFilter,
             columnVisibility,
+            pagination,
         },
     });
 
@@ -190,7 +197,7 @@ export function DataTable<TData, TValue>({
                 </Table>
             </div>
             <div className="py-4">
-                <DataTablePagination table={table} />
+                <DataTablePagination table={table} pagination={pagination} />
             </div>
         </div>
     );

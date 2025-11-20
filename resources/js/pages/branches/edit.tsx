@@ -1,23 +1,27 @@
 import { AutoForm } from '@/components/form/auto-form';
 import AppLayout from '@/layouts/app-layout';
-import departments from '@/routes/departments';
+import branches from '@/routes/branches';
 import { type BreadcrumbItem } from '@/types';
+import { Branch } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    { title: 'Departments', href: departments.index().url },
-    { title: 'Create', href: departments.create().url },
-];
-
 const schema = z.object({
-    title: z.string().min(5).max(32),
+    city: z.string(),
 });
 
-export default function DepartmentsCreate() {
+export default function BranchesEdit({ branch }: { branch: Branch }) {
+    const breadcrumbs: BreadcrumbItem[] = [
+        { title: 'Branches', href: branches.index().url },
+        { title: 'Edit', href: branches.edit(branch.id).url },
+    ];
+
     const handleSubmit = (values: any) => {
-        router.post(departments.store(), values, {
+        router.patch(branches.update(branch.id), values, {
+            onSuccess: () => {
+                toast.success('Updated Successfully');
+            },
             onError: (errors) => {
                 toast.error('Server Validation Failed', {
                     description: JSON.stringify(errors),
@@ -28,20 +32,20 @@ export default function DepartmentsCreate() {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Create Department" />
+            <Head title="Edit Branch" />
             <div className="h-full p-6">
                 <AutoForm
-                    title="Create Department"
-                    description="Add a new department to our database."
+                    title={`Edit the ${branch.city} Branch`}
+                    description="Update the details of this branch."
                     schema={schema}
                     onSubmit={handleSubmit}
-                    defaultValues={{}}
+                    defaultValues={{ ...branch }}
                     fields={[
                         {
                             type: 'text',
-                            name: 'title',
-                            label: 'Title',
-                            placeholder: 'Accounting',
+                            name: 'city',
+                            label: 'City',
+                            placeholder: 'Scranton, PA',
                         },
                     ]}
                 />

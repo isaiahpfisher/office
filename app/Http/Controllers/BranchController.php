@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Department;
+use App\Models\Branch;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class DepartmentController extends Controller {
+class BranchController extends Controller {
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        return Inertia::render('departments/index', ['data' => Department::all()]);
+        return Inertia::render('branches/index', ['data' => Branch::all()]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return Inertia::render("departments/create");
+        return Inertia::render("branches/create");
     }
 
     /**
@@ -26,40 +26,40 @@ class DepartmentController extends Controller {
      */
     public function store(Request $request) {
         $valid = $request->validate([
-            'title' => 'required|min:5',
+            'city' => 'required',
         ]);
 
-        Department::create([
-            'title' => $valid['title'],
+        Branch::create([
+            'city' => $valid['city'],
         ]);
 
-        return redirect()->route('departments.index');
+        return redirect()->route('branches.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Department $department) {
+    public function show(Branch $branch) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Department $department) {
-        return Inertia::render('departments/edit', ['department' => $department]);
+    public function edit(Branch $branch) {
+        return Inertia::render('branches/edit', ['branch' => $branch]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Department $department) {
+    public function update(Request $request, Branch $branch) {
         $valid = $request->validate([
-            'title' => 'required|min:5',
+            'city' => 'required',
         ]);
 
-        $department->update([
-            'title' => $valid['title'],
+        $branch->update([
+            'city' => $valid['city'],
         ]);
 
         return back();
@@ -68,7 +68,7 @@ class DepartmentController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Department $department) {
-        $department->delete();
+    public function destroy(Branch $branch) {
+        $branch->delete();
     }
 }
