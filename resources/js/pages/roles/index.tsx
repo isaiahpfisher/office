@@ -70,7 +70,7 @@ export default function RolesIndex({ data }: { data: Role[] }) {
             <Head title="Roles" />
             <div className="h-full p-6">
                 <DataTable
-                    title="Characters"
+                    title="Roles"
                     description="Browse roles from the show."
                     columns={columns}
                     data={data}

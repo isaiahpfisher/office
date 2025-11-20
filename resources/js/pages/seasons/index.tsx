@@ -27,12 +27,15 @@ const columns: ColumnDef<Season>[] = [
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Start Date" />
         ),
+        cell: ({ row }) =>
+            new Date(row.original.start_date).toLocaleDateString(),
     },
     {
         accessorKey: 'end_date',
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="End Date" />
         ),
+        cell: ({ row }) => new Date(row.original.end_date).toLocaleDateString(),
     },
     {
         accessorKey: 'overview',
@@ -40,7 +43,9 @@ const columns: ColumnDef<Season>[] = [
             <DataTableColumnHeader column={column} title="Overview" />
         ),
         cell: ({ row }) => (
-            <div className="max-w-2xl truncate">{row.original.overview}</div>
+            <div className="line-clamp-2 max-w-lg text-wrap">
+                {row.original.overview}
+            </div>
         ),
     },
     {
@@ -54,7 +59,7 @@ const columns: ColumnDef<Season>[] = [
     },
 ];
 
-export default function seasonsIndex({ data }: { data: Season[] }) {
+export default function SeasonsIndex({ data }: { data: Season[] }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Seasons" />

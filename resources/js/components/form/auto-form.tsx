@@ -19,12 +19,7 @@ import {
 } from '@/components/ui/field';
 
 import { Input } from '@/components/ui/input';
-import {
-    InputGroup,
-    InputGroupAddon,
-    InputGroupText,
-    InputGroupTextarea,
-} from '@/components/ui/input-group';
+import { Textarea } from '@/components/ui/textarea';
 
 import {
     Select,
@@ -61,6 +56,7 @@ import { useMemo, useState } from 'react';
 export type AutoFormField =
     | {
           type: 'text';
+          specificType?: 'number' | 'date' | 'text';
           name: string;
           label: string;
           colSpan?: number;
@@ -74,7 +70,6 @@ export type AutoFormField =
           colSpan?: number;
           placeholder?: string;
           rows?: number;
-          maxChars?: number;
           description?: string;
       }
     | {
@@ -132,22 +127,19 @@ export function AutoForm({
 }: AutoFormConfig) {
     const parsedDefaultValues = useMemo(() => {
         const values = { ...defaultValues };
-
         fields.forEach((field) => {
             const val = values[field.name];
             if (val === undefined || val === null) return;
 
-            // 1. Convert date strings to Date objects
+            if (field.type === 'text' && field.specificType === 'number') {
+                values[field.name] = String(val);
+            }
+
+            // Only parse Dates. Do NOT convert numbers to strings here.
             if (field.type === 'date' && typeof val === 'string') {
                 values[field.name] = new Date(val);
             }
-
-            // 2. Convert numbers to strings for Select/Combobox
-            if (field.type === 'select' && typeof val === 'number') {
-                values[field.name] = String(val);
-            }
         });
-
         return values;
     }, [defaultValues, fields]);
 
@@ -210,6 +202,10 @@ export function AutoForm({
                                                     <Input
                                                         id={field.name}
                                                         name={field.name}
+                                                        type={
+                                                            field.specificType ??
+                                                            'text'
+                                                        }
                                                         value={
                                                             fieldApi.state.value
                                                         }
@@ -230,69 +226,50 @@ export function AutoForm({
 
                                                 {/* TEXTAREA */}
                                                 {field.type === 'textarea' && (
-                                                    <InputGroup>
-                                                        <InputGroupTextarea
-                                                            id={field.name}
-                                                            name={field.name}
-                                                            rows={
-                                                                field.rows ?? 6
-                                                            }
-                                                            value={
-                                                                fieldApi.state
-                                                                    .value
-                                                            }
-                                                            onBlur={
-                                                                fieldApi.handleBlur
-                                                            }
-                                                            onChange={(e) =>
-                                                                fieldApi.handleChange(
-                                                                    e.target
-                                                                        .value,
-                                                                )
-                                                            }
-                                                            aria-invalid={
-                                                                isInvalid
-                                                            }
-                                                            placeholder={
-                                                                field.placeholder
-                                                            }
-                                                            className="min-h-24 resize-none"
-                                                        />
-
-                                                        {field.maxChars && (
-                                                            <InputGroupAddon align="block-end">
-                                                                <InputGroupText className="tabular-nums">
-                                                                    {
-                                                                        fieldApi
-                                                                            .state
-                                                                            .value
-                                                                            .length
-                                                                    }{' '}
-                                                                    /{' '}
-                                                                    {
-                                                                        field.maxChars
-                                                                    }
-                                                                </InputGroupText>
-                                                            </InputGroupAddon>
-                                                        )}
-                                                    </InputGroup>
+                                                    <Textarea
+                                                        id={field.name}
+                                                        name={field.name}
+                                                        rows={field.rows ?? 6}
+                                                        value={
+                                                            fieldApi.state.value
+                                                        }
+                                                        onBlur={
+                                                            fieldApi.handleBlur
+                                                        }
+                                                        onChange={(e) =>
+                                                            fieldApi.handleChange(
+                                                                e.target.value,
+                                                            )
+                                                        }
+                                                        aria-invalid={isInvalid}
+                                                        placeholder={
+                                                            field.placeholder
+                                                        }
+                                                        className="min-h-24 resize-none"
+                                                    />
                                                 )}
 
                                                 {/* SELECT */}
                                                 {field.type === 'select' &&
                                                     !field.searchable && (
                                                         <Select
-                                                            value={
-                                                                fieldApi.state
-                                                                    .value as string
-                                                            }
+                                                            // FIX 2: Convert number to string for UI display only
+                                                            value={fieldApi.state.value?.toString()}
                                                             onValueChange={(
                                                                 val,
-                                                            ) =>
+                                                            ) => {
+                                                                // FIX 3: Find original option to restore the correct type (number or string)
+                                                                const selectedOption =
+                                                                    field.options.find(
+                                                                        (o) =>
+                                                                            o.value.toString() ===
+                                                                            val,
+                                                                    );
                                                                 fieldApi.handleChange(
-                                                                    val.toString(),
-                                                                )
-                                                            }
+                                                                    selectedOption?.value ??
+                                                                        val,
+                                                                );
+                                                            }}
                                                         >
                                                             <SelectTrigger
                                                                 id={field.name}
@@ -312,12 +289,8 @@ export function AutoForm({
                                                                 {field.options.map(
                                                                     (opt) => (
                                                                         <SelectItem
-                                                                            key={
-                                                                                opt.value as string
-                                                                            }
-                                                                            value={
-                                                                                opt.value as string
-                                                                            }
+                                                                            key={opt.value.toString()}
+                                                                            value={opt.value.toString()}
                                                                         >
                                                                             {
                                                                                 opt.label
@@ -346,6 +319,7 @@ export function AutoForm({
                                                                 fieldApi.state
                                                                     .value
                                                             }
+                                                            // FIX 4: Pass the raw value (number/string) back to form state
                                                             onChange={(val) =>
                                                                 fieldApi.handleChange(
                                                                     val,
@@ -431,8 +405,8 @@ function ComboboxField({
     isInvalid,
 }: {
     fieldName: string;
-    value: string | number;
-    onChange: (value: string) => void;
+    value: string | number; // Value can be number
+    onChange: (value: string | number) => void; // Output can be number
     placeholder?: string;
     options: { label: string; value: string | number }[];
     isInvalid: boolean;
@@ -454,7 +428,7 @@ function ComboboxField({
                     className={cn(
                         'flex items-center justify-between hover:bg-background data-[state=open]:border-ring data-[state=open]:ring-[3px] data-[state=open]:ring-ring/50',
                         !value && 'text-muted-foreground',
-                        isInvalid ? 'border-destructive' : 'border-input',
+                        isInvalid ? 'border-red-500' : 'border-input',
                     )}
                 >
                     {selectedLabel || placeholder || 'Select...'}
@@ -469,10 +443,11 @@ function ComboboxField({
                         <CommandGroup>
                             {options.map((opt) => (
                                 <CommandItem
-                                    key={opt.value as string}
+                                    key={opt.value.toString()}
                                     value={opt.label}
                                     onSelect={() => {
-                                        onChange(opt.value.toString());
+                                        // FIX 5: Pass raw opt.value (number) instead of toString()
+                                        onChange(opt.value);
                                         setOpen(false);
                                     }}
                                 >

@@ -18,14 +18,28 @@ class SeasonController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-        //
+        return Inertia::render("seasons/create");
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        //
+        $valid = $request->validate([
+            'number' => 'required|numeric|unique:seasons,number',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'overview' => 'required|max:255',
+        ]);
+
+        Season::create([
+            'number' => $valid['number'],
+            'start_date' => $valid['start_date'],
+            'end_date' => $valid['end_date'],
+            'overview' => $valid['overview'],
+        ]);
+
+        return redirect()->route('seasons.index');
     }
 
     /**
@@ -39,20 +53,34 @@ class SeasonController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Season $season) {
-        //
+        return Inertia::render("seasons/edit", ['season' => $season]);
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Season $season) {
-        //
+        $valid = $request->validate([
+            'number' => "required|numeric|unique:seasons,number,{$season->id}",
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'overview' => 'required|max:255',
+        ]);
+
+        $season->update([
+            'number' => $valid['number'],
+            'start_date' => $valid['start_date'],
+            'end_date' => $valid['end_date'],
+            'overview' => $valid['overview'],
+        ]);
+
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Season $season) {
-        //
+        $season->delete();
     }
 }

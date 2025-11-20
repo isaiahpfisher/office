@@ -27,7 +27,10 @@ export function DataTableActionsCell({
                         <MoreHorizontal className="size-4" />
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent
+                    align="end"
+                    onClick={(e) => e.stopPropagation()}
+                >
                     <DropdownMenuItem asChild>
                         <Link href={editRoute}>
                             <EditIcon />

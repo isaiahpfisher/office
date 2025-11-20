@@ -11,7 +11,7 @@ const schema = z.object({
     first_name: z.string(),
     last_name: z.string(),
     sex: z.enum(['Male', 'Female']),
-    actor_id: z.string(),
+    actor_id: z.number(),
 });
 
 export default function CharactersEdit({
@@ -38,6 +38,8 @@ export default function CharactersEdit({
             },
         });
     };
+
+    console.log(character);
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>

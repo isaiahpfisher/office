@@ -6,6 +6,7 @@ use App\Models\Character;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RoleController extends Controller {
     /**
