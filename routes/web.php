@@ -5,6 +5,7 @@ use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\PrankController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SeasonController;
 use Illuminate\Support\Facades\Route;
@@ -88,4 +89,13 @@ Route::controller(BranchController::class)->group(function () {
     Route::post('/branches', 'store')->name('branches.store');
     Route::patch('/branches/{branch}', 'update')->name('branches.update');
     Route::delete('/branches/{branch}', 'destroy')->name('branches.destroy');
+});
+
+Route::controller(PrankController::class)->group(function () {
+    Route::get('/pranks', 'index')->name('pranks.index');
+    Route::get('/pranks/create', 'create')->name('pranks.create');
+    Route::get('/pranks/{prank}', 'edit')->name('pranks.edit');
+    Route::post('/pranks', 'store')->name('pranks.store');
+    Route::patch('/pranks/{prank}', 'update')->name('pranks.update');
+    Route::delete('/pranks/{prank}', 'destroy')->name('pranks.destroy');
 });

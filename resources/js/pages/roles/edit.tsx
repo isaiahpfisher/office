@@ -11,7 +11,7 @@ const schema = z.object({
     title: z.string(),
     start_date: z.date(),
     end_date: z.date(),
-    character_id: z.string(),
+    character_id: z.number(),
 });
 
 export default function RolesEdit({

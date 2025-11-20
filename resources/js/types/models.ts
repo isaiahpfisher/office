@@ -54,3 +54,9 @@ export type Department = {
 export type Branch = {
     city: string;
 } & Base;
+
+export type Prank = {
+    description: string;
+    episode_id: string;
+    episode: Episode;
+} & Base;

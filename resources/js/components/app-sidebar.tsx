@@ -15,6 +15,7 @@ import branches from '@/routes/branches';
 import characters from '@/routes/characters';
 import departments from '@/routes/departments';
 import episodes from '@/routes/episodes';
+import pranks from '@/routes/pranks';
 import roles from '@/routes/roles';
 import seasons from '@/routes/seasons';
 import { type NavItem } from '@/types';
@@ -81,7 +82,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Pranks',
-        href: '/todo',
+        href: pranks.index(),
         icon: LaughIcon,
     },
     {
