@@ -1,6 +1,4 @@
 import { DataTableActionsCell } from '@/components/table/actions-cell';
-import { DataTableCheckboxCell } from '@/components/table/checkbox-cell';
-import { DataTableCheckboxHeader } from '@/components/table/checkbox-header';
 import { DataTableColumnHeader } from '@/components/table/column-header';
 import { DataTable } from '@/components/table/data-table';
 import AppLayout from '@/layouts/app-layout';
@@ -18,13 +16,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 const columns: ColumnDef<Season>[] = [
-    {
-        id: 'select',
-        header: ({ table }) => <DataTableCheckboxHeader table={table} />,
-        cell: ({ row }) => <DataTableCheckboxCell row={row} />,
-        enableSorting: false,
-        enableHiding: false,
-    },
     {
         accessorKey: 'number',
         header: ({ column }) => (
@@ -56,8 +47,8 @@ const columns: ColumnDef<Season>[] = [
         id: 'actions',
         cell: ({ row }) => (
             <DataTableActionsCell
-                editRoute={seasons.edit(parseInt(row.original.id)).url}
-                deleteRoute={seasons.destroy(parseInt(row.original.id)).url}
+                editRoute={seasons.edit(row.original.id).url}
+                deleteRoute={seasons.destroy(row.original.id).url}
             />
         ),
     },
@@ -74,6 +65,7 @@ export default function seasonsIndex({ data }: { data: Season[] }) {
                     columns={columns}
                     data={data}
                     createRoute={seasons.create().url}
+                    getEditRoute={(id: number) => seasons.edit(id).url}
                 />
             </div>
         </AppLayout>

@@ -34,9 +34,29 @@ import {
     SelectValue,
 } from '@/components/ui/select';
 
-// -------------------------------
-// TYPES
-// -------------------------------
+import {
+    Command,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from '@/components/ui/command';
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover';
+
+import { cn } from '@/lib/utils';
+import {
+    Calendar as CalendarIcon,
+    CheckIcon,
+    ChevronsUpDownIcon,
+} from 'lucide-react';
+
+import { Calendar } from '@/components/ui/calendar';
+import { format } from 'date-fns';
+import { useMemo, useState } from 'react';
 
 export type AutoFormField =
     | {
@@ -61,10 +81,19 @@ export type AutoFormField =
           type: 'select';
           name: string;
           label: string;
+          searchable?: boolean;
           colSpan?: number;
           placeholder?: string;
           description?: string;
-          options: { label: string; value: string }[];
+          options: { label: string; value: string | number }[];
+      }
+    | {
+          type: 'date';
+          name: string;
+          label: string;
+          colSpan?: number;
+          placeholder?: string;
+          description?: string;
       };
 
 export interface AutoFormConfig {
@@ -90,10 +119,6 @@ const colSpans = {
     8: 'col-span-8',
 };
 
-// ======================================================
-// AutoForm Component
-// ======================================================
-
 export function AutoForm({
     title,
     description,
@@ -105,8 +130,29 @@ export function AutoForm({
     resetLabel = 'Reset',
     onSubmit,
 }: AutoFormConfig) {
+    const parsedDefaultValues = useMemo(() => {
+        const values = { ...defaultValues };
+
+        fields.forEach((field) => {
+            const val = values[field.name];
+            if (val === undefined || val === null) return;
+
+            // 1. Convert date strings to Date objects
+            if (field.type === 'date' && typeof val === 'string') {
+                values[field.name] = new Date(val);
+            }
+
+            // 2. Convert numbers to strings for Select/Combobox
+            if (field.type === 'select' && typeof val === 'number') {
+                values[field.name] = String(val);
+            }
+        });
+
+        return values;
+    }, [defaultValues, fields]);
+
     const form = useForm({
-        defaultValues,
+        defaultValues: parsedDefaultValues,
         validators: { onSubmit: schema },
         onSubmit: async ({ value }) => {
             await onSubmit?.(value, form);
@@ -232,51 +278,102 @@ export function AutoForm({
                                                     </InputGroup>
                                                 )}
 
-                                                {/* SELECT FIELD */}
-                                                {field.type === 'select' && (
-                                                    <Select
+                                                {/* SELECT */}
+                                                {field.type === 'select' &&
+                                                    !field.searchable && (
+                                                        <Select
+                                                            value={
+                                                                fieldApi.state
+                                                                    .value as string
+                                                            }
+                                                            onValueChange={(
+                                                                val,
+                                                            ) =>
+                                                                fieldApi.handleChange(
+                                                                    val.toString(),
+                                                                )
+                                                            }
+                                                        >
+                                                            <SelectTrigger
+                                                                id={field.name}
+                                                                aria-invalid={
+                                                                    isInvalid
+                                                                }
+                                                            >
+                                                                <SelectValue
+                                                                    placeholder={
+                                                                        field.placeholder ??
+                                                                        'Select...'
+                                                                    }
+                                                                />
+                                                            </SelectTrigger>
+
+                                                            <SelectContent>
+                                                                {field.options.map(
+                                                                    (opt) => (
+                                                                        <SelectItem
+                                                                            key={
+                                                                                opt.value as string
+                                                                            }
+                                                                            value={
+                                                                                opt.value as string
+                                                                            }
+                                                                        >
+                                                                            {
+                                                                                opt.label
+                                                                            }
+                                                                        </SelectItem>
+                                                                    ),
+                                                                )}
+                                                            </SelectContent>
+                                                        </Select>
+                                                    )}
+
+                                                {/* COMBOBOX */}
+                                                {field.type === 'select' &&
+                                                    !!field.searchable && (
+                                                        <ComboboxField
+                                                            fieldName={
+                                                                field.name
+                                                            }
+                                                            placeholder={
+                                                                field.placeholder
+                                                            }
+                                                            options={
+                                                                field.options
+                                                            }
+                                                            value={
+                                                                fieldApi.state
+                                                                    .value
+                                                            }
+                                                            onChange={(val) =>
+                                                                fieldApi.handleChange(
+                                                                    val,
+                                                                )
+                                                            }
+                                                            isInvalid={
+                                                                isInvalid
+                                                            }
+                                                        />
+                                                    )}
+
+                                                {/* DATE PICKER */}
+                                                {field.type === 'date' && (
+                                                    <DateField
+                                                        fieldName={field.name}
                                                         value={
                                                             fieldApi.state.value
                                                         }
-                                                        onValueChange={(val) =>
+                                                        onChange={(val) =>
                                                             fieldApi.handleChange(
                                                                 val,
                                                             )
                                                         }
-                                                    >
-                                                        <SelectTrigger
-                                                            id={field.name}
-                                                            aria-invalid={
-                                                                isInvalid
-                                                            }
-                                                        >
-                                                            <SelectValue
-                                                                placeholder={
-                                                                    field.placeholder ??
-                                                                    'Select...'
-                                                                }
-                                                            />
-                                                        </SelectTrigger>
-
-                                                        <SelectContent>
-                                                            {field.options.map(
-                                                                (opt) => (
-                                                                    <SelectItem
-                                                                        key={
-                                                                            opt.value
-                                                                        }
-                                                                        value={
-                                                                            opt.value
-                                                                        }
-                                                                    >
-                                                                        {
-                                                                            opt.label
-                                                                        }
-                                                                    </SelectItem>
-                                                                ),
-                                                            )}
-                                                        </SelectContent>
-                                                    </Select>
+                                                        placeholder={
+                                                            field.placeholder
+                                                        }
+                                                        isInvalid={isInvalid}
+                                                    />
                                                 )}
 
                                                 {field.description && (
@@ -322,5 +419,123 @@ export function AutoForm({
                 </Field>
             </CardFooter>
         </Card>
+    );
+}
+
+function ComboboxField({
+    fieldName,
+    value,
+    onChange,
+    placeholder,
+    options,
+    isInvalid,
+}: {
+    fieldName: string;
+    value: string | number;
+    onChange: (value: string) => void;
+    placeholder?: string;
+    options: { label: string; value: string | number }[];
+    isInvalid: boolean;
+}) {
+    const [open, setOpen] = useState(false);
+
+    const selectedLabel = options.find(
+        (o) => o.value.toString() === value?.toString(),
+    )?.label;
+
+    return (
+        <Popover open={open} onOpenChange={setOpen}>
+            <PopoverTrigger asChild>
+                <Button
+                    id={fieldName}
+                    variant={'outline'}
+                    role="combobox"
+                    aria-expanded={open}
+                    className={cn(
+                        'flex items-center justify-between hover:bg-background data-[state=open]:border-ring data-[state=open]:ring-[3px] data-[state=open]:ring-ring/50',
+                        !value && 'text-muted-foreground',
+                        isInvalid ? 'border-destructive' : 'border-input',
+                    )}
+                >
+                    {selectedLabel || placeholder || 'Select...'}
+                    <ChevronsUpDownIcon className="h-4 w-4 opacity-50" />
+                </Button>
+            </PopoverTrigger>
+
+            <PopoverContent className="w-md p-0" align="start">
+                <Command className="w-full">
+                    <CommandInput placeholder={placeholder ?? 'Search...'} />
+                    <CommandList>
+                        <CommandGroup>
+                            {options.map((opt) => (
+                                <CommandItem
+                                    key={opt.value as string}
+                                    value={opt.label}
+                                    onSelect={() => {
+                                        onChange(opt.value.toString());
+                                        setOpen(false);
+                                    }}
+                                >
+                                    <CheckIcon
+                                        className={cn(
+                                            'mr-2 h-4 w-4',
+                                            opt.value.toString() ===
+                                                value?.toString()
+                                                ? 'opacity-100'
+                                                : 'opacity-0',
+                                        )}
+                                    />
+                                    {opt.label}
+                                </CommandItem>
+                            ))}
+                        </CommandGroup>
+                    </CommandList>
+                </Command>
+            </PopoverContent>
+        </Popover>
+    );
+}
+
+function DateField({
+    fieldName,
+    value,
+    onChange,
+    placeholder,
+    isInvalid,
+}: {
+    fieldName: string;
+    value: Date | null;
+    onChange: (value: Date | null) => void;
+    placeholder?: string;
+    isInvalid: boolean;
+}) {
+    return (
+        <Popover>
+            <PopoverTrigger asChild>
+                <Button
+                    id={fieldName}
+                    variant="outline"
+                    className={cn(
+                        'flex items-center justify-start text-left font-normal hover:bg-background data-[state=open]:border-ring data-[state=open]:ring-[3px] data-[state=open]:ring-ring/50',
+                        !value && 'text-muted-foreground',
+                        isInvalid ? 'border-destructive' : 'border-input',
+                    )}
+                >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {value
+                        ? format(value, 'PPP')
+                        : (placeholder ?? 'Pick a date')}
+                </Button>
+            </PopoverTrigger>
+
+            <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                    mode="single"
+                    selected={value ?? undefined}
+                    onSelect={(date) => onChange(date ?? null)}
+                    initialFocus
+                />
+            </PopoverContent>
+        </Popover>
     );
 }

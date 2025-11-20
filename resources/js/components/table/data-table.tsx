@@ -38,7 +38,7 @@ interface DataTableProps<TData, TValue> {
     title: string;
     description?: string;
     createRoute: string;
-    getEditRoute: (id: string) => string;
+    getEditRoute: (id: number) => string;
 }
 
 export function DataTable<TData, TValue>({
@@ -54,7 +54,6 @@ export function DataTable<TData, TValue>({
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>(
         {},
     );
-    const [rowSelection, setRowSelection] = useState({});
 
     const sortDataByCreatedAt = (a, b) => {
         return (
@@ -72,12 +71,10 @@ export function DataTable<TData, TValue>({
         onGlobalFilterChange: setGlobalFilter,
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
         state: {
             sorting,
             globalFilter,
             columnVisibility,
-            rowSelection,
         },
     });
 
@@ -167,7 +164,10 @@ export function DataTable<TData, TValue>({
                                     }
                                 >
                                     {row.getVisibleCells().map((cell) => (
-                                        <TableCell key={cell.id}>
+                                        <TableCell
+                                            key={cell.id}
+                                            className="pl-4"
+                                        >
                                             {flexRender(
                                                 cell.column.columnDef.cell,
                                                 cell.getContext(),

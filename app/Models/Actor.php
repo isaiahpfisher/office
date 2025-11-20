@@ -3,13 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Actor extends Model
-{
+class Actor extends Model {
     protected $guarded = [];
 
-    public function character() : HasOne {
-        return $this->hasOne(Character::class);
+    public function characters(): HasMany {
+        return $this->hasMany(Character::class);
     }
 }

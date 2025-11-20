@@ -2,7 +2,7 @@ import { AutoForm } from '@/components/form/auto-form';
 import AppLayout from '@/layouts/app-layout';
 import characters from '@/routes/characters';
 import { type BreadcrumbItem } from '@/types';
-import { Character } from '@/types/models';
+import { Actor, Character } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -11,20 +11,23 @@ const schema = z.object({
     first_name: z.string(),
     last_name: z.string(),
     sex: z.enum(['Male', 'Female']),
+    actor_id: z.string(),
 });
 
 export default function CharactersEdit({
     character,
+    actors,
 }: {
     character: Character;
+    actors: Actor[];
 }) {
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Characters', href: characters.index().url },
-        { title: 'Edit', href: characters.edit(parseInt(character.id)).url },
+        { title: 'Edit', href: characters.edit(character.id).url },
     ];
 
     const handleSubmit = (values: any) => {
-        router.patch(characters.update(parseInt(character.id)), values, {
+        router.patch(characters.update(character.id), values, {
             onSuccess: () => {
                 toast.success('Updated Successfully');
             },
@@ -45,7 +48,7 @@ export default function CharactersEdit({
                     description="Update the details of this character."
                     schema={schema}
                     onSubmit={handleSubmit}
-                    columns={3}
+                    columns={2}
                     defaultValues={{ ...character }}
                     fields={[
                         {
@@ -69,6 +72,16 @@ export default function CharactersEdit({
                                 { label: 'Male', value: 'Male' },
                                 { label: 'Female', value: 'Female' },
                             ],
+                        },
+                        {
+                            type: 'select',
+                            name: 'actor_id',
+                            label: 'Actor',
+                            placeholder: 'Choose an option',
+                            options: actors.map((actor) => ({
+                                label: `${actor.first_name} ${actor.last_name}`,
+                                value: actor.id,
+                            })),
                         },
                     ]}
                 />

@@ -1,28 +1,25 @@
 import { AutoForm } from '@/components/form/auto-form';
 import AppLayout from '@/layouts/app-layout';
-import departments from '@/routes/departments';
+import actors from '@/routes/actors';
 import { type BreadcrumbItem } from '@/types';
-import { Department } from '@/types/models';
+import { Actor } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
 const schema = z.object({
-    title: z.string().min(5).max(32),
+    first_name: z.string(),
+    last_name: z.string(),
 });
 
-export default function DepartmentsEdit({
-    department,
-}: {
-    department: Department;
-}) {
+export default function ActorsEdit({ actor }: { actor: Actor }) {
     const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Departments', href: departments.index().url },
-        { title: 'Edit', href: departments.edit(department.id).url },
+        { title: 'Actors', href: actors.index().url },
+        { title: 'Edit', href: actors.edit(actor.id).url },
     ];
 
     const handleSubmit = (values: any) => {
-        router.patch(departments.update(department.id), values, {
+        router.patch(actors.update(actor.id), values, {
             onSuccess: () => {
                 toast.success('Updated Successfully');
             },
@@ -36,20 +33,27 @@ export default function DepartmentsEdit({
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Edit Department" />
+            <Head title="Edit Actor" />
             <div className="h-full p-6">
                 <AutoForm
-                    title={`Edit ${department.title}`}
-                    description="Update the details of this department."
+                    title={`Edit ${actor.first_name} ${actor.last_name}`}
+                    description="Update the details of this actor."
                     schema={schema}
                     onSubmit={handleSubmit}
-                    defaultValues={{ ...department }}
+                    columns={2}
+                    defaultValues={{ ...actor }}
                     fields={[
                         {
                             type: 'text',
-                            name: 'title',
-                            label: 'Title',
-                            placeholder: 'Accounting',
+                            name: 'first_name',
+                            label: 'First Name',
+                            placeholder: 'John',
+                        },
+                        {
+                            type: 'text',
+                            name: 'last_name',
+                            label: 'Last Name',
+                            placeholder: 'Doe',
                         },
                     ]}
                 />

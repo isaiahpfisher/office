@@ -2,6 +2,7 @@ import { AutoForm } from '@/components/form/auto-form';
 import AppLayout from '@/layouts/app-layout';
 import characters from '@/routes/characters';
 import { type BreadcrumbItem } from '@/types';
+import { Actor } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -15,9 +16,10 @@ const schema = z.object({
     first_name: z.string(),
     last_name: z.string(),
     sex: z.enum(['Male', 'Female']),
+    actor_id: z.string(),
 });
 
-export default function CharactersCreate() {
+export default function CharactersCreate({ actors }: { actors: Actor[] }) {
     const handleSubmit = (values: any) => {
         router.post(characters.store(), values, {
             onError: (errors) => {
@@ -36,7 +38,7 @@ export default function CharactersCreate() {
                     title="Create Character"
                     description="Add a new character to our database."
                     schema={schema}
-                    columns={3}
+                    columns={2}
                     onSubmit={handleSubmit}
                     defaultValues={{}}
                     fields={[
@@ -61,6 +63,16 @@ export default function CharactersCreate() {
                                 { label: 'Male', value: 'Male' },
                                 { label: 'Female', value: 'Female' },
                             ],
+                        },
+                        {
+                            type: 'select',
+                            name: 'actor_id',
+                            label: 'Actor',
+                            placeholder: 'Choose an option',
+                            options: actors.map((actor) => ({
+                                label: `${actor.first_name} ${actor.last_name}`,
+                                value: actor.id,
+                            })),
                         },
                     ]}
                 />

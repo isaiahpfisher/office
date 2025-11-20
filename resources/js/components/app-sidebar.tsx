@@ -10,8 +10,10 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { chat } from '@/routes';
+import actors from '@/routes/actors';
 import characters from '@/routes/characters';
 import departments from '@/routes/departments';
+import roles from '@/routes/roles';
 import seasons from '@/routes/seasons';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
@@ -41,19 +43,19 @@ const mainNavItems: NavItem[] = [
         icon: MessagesSquareIcon,
     },
     {
+        title: 'Actors',
+        href: actors.index(),
+        icon: DramaIcon,
+    },
+    {
         title: 'Characters',
         href: characters.index(),
         icon: UsersIcon,
     },
     {
         title: 'Roles',
-        href: '/todo',
+        href: roles.index(),
         icon: UserCheckIcon,
-    },
-    {
-        title: 'Actors',
-        href: '/todo',
-        icon: DramaIcon,
     },
     {
         title: 'Seasons',

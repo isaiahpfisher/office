@@ -1,31 +1,24 @@
 import { AutoForm } from '@/components/form/auto-form';
 import AppLayout from '@/layouts/app-layout';
-import departments from '@/routes/departments';
+import actors from '@/routes/actors';
 import { type BreadcrumbItem } from '@/types';
-import { Department } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
 
+const breadcrumbs: BreadcrumbItem[] = [
+    { title: 'Actors', href: actors.index().url },
+    { title: 'Create', href: actors.create().url },
+];
+
 const schema = z.object({
-    title: z.string().min(5).max(32),
+    first_name: z.string(),
+    last_name: z.string(),
 });
 
-export default function DepartmentsEdit({
-    department,
-}: {
-    department: Department;
-}) {
-    const breadcrumbs: BreadcrumbItem[] = [
-        { title: 'Departments', href: departments.index().url },
-        { title: 'Edit', href: departments.edit(department.id).url },
-    ];
-
+export default function ActorsCreate() {
     const handleSubmit = (values: any) => {
-        router.patch(departments.update(department.id), values, {
-            onSuccess: () => {
-                toast.success('Updated Successfully');
-            },
+        router.post(actors.store(), values, {
             onError: (errors) => {
                 toast.error('Server Validation Failed', {
                     description: JSON.stringify(errors),
@@ -36,20 +29,27 @@ export default function DepartmentsEdit({
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Edit Department" />
+            <Head title="Create Actor" />
             <div className="h-full p-6">
                 <AutoForm
-                    title={`Edit ${department.title}`}
-                    description="Update the details of this department."
+                    title="Create Actor"
+                    description="Add a new actor to our database."
                     schema={schema}
+                    columns={2}
                     onSubmit={handleSubmit}
-                    defaultValues={{ ...department }}
+                    defaultValues={{}}
                     fields={[
                         {
                             type: 'text',
-                            name: 'title',
-                            label: 'Title',
-                            placeholder: 'Accounting',
+                            name: 'first_name',
+                            label: 'First Name',
+                            placeholder: 'John',
+                        },
+                        {
+                            type: 'text',
+                            name: 'last_name',
+                            label: 'Last Name',
+                            placeholder: 'Doe',
                         },
                     ]}
                 />

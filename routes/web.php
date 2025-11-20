@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\ActorController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SeasonController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -24,6 +26,15 @@ Route::controller(DepartmentController::class)->group(function () {
     Route::delete('/departments/{department}', 'destroy')->name('departments.destroy');
 });
 
+Route::controller(ActorController::class)->group(function () {
+    Route::get('/actors', 'index')->name('actors.index');
+    Route::get('/actors/create', 'create')->name('actors.create');
+    Route::get('/actors/{actor}', 'edit')->name('actors.edit');
+    Route::post('/actors', 'store')->name('actors.store');
+    Route::patch('/actors/{actor}', 'update')->name('actors.update');
+    Route::delete('/actors/{actor}', 'destroy')->name('actors.destroy');
+});
+
 Route::controller(CharacterController::class)->group(function () {
     Route::get('/characters', 'index')->name('characters.index');
     Route::get('/characters/create', 'create')->name('characters.create');
@@ -33,6 +44,14 @@ Route::controller(CharacterController::class)->group(function () {
     Route::delete('/characters/{character}', 'destroy')->name('characters.destroy');
 });
 
+Route::controller(RoleController::class)->group(function () {
+    Route::get('/roles', 'index')->name('roles.index');
+    Route::get('/roles/create', 'create')->name('roles.create');
+    Route::get('/roles/{role}', 'edit')->name('roles.edit');
+    Route::post('/roles', 'store')->name('roles.store');
+    Route::patch('/roles/{role}', 'update')->name('roles.update');
+    Route::delete('/roles/{role}', 'destroy')->name('roles.destroy');
+});
 
 Route::controller(SeasonController::class)->group(function () {
     Route::get('/seasons', 'index')->name('seasons.index');

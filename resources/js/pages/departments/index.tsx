@@ -1,8 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table';
 
 import { DataTableActionsCell } from '@/components/table/actions-cell';
-import { DataTableCheckboxCell } from '@/components/table/checkbox-cell';
-import { DataTableCheckboxHeader } from '@/components/table/checkbox-header';
 import { DataTableColumnHeader } from '@/components/table/column-header';
 import { DataTable } from '@/components/table/data-table';
 import AppLayout from '@/layouts/app-layout';
@@ -20,13 +18,6 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 const columns: ColumnDef<Department>[] = [
     {
-        id: 'select',
-        header: ({ table }) => <DataTableCheckboxHeader table={table} />,
-        cell: ({ row }) => <DataTableCheckboxCell row={row} />,
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
         accessorKey: 'title',
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Title" />
@@ -36,8 +27,8 @@ const columns: ColumnDef<Department>[] = [
         id: 'actions',
         cell: ({ row }) => (
             <DataTableActionsCell
-                editRoute={departments.edit(parseInt(row.original.id)).url}
-                deleteRoute={departments.destroy(parseInt(row.original.id)).url}
+                editRoute={departments.edit(row.original.id).url}
+                deleteRoute={departments.destroy(row.original.id).url}
             />
         ),
     },
@@ -54,9 +45,7 @@ export default function DepartmentsIndex({ data }: { data: Department[] }) {
                     columns={columns}
                     data={data}
                     createRoute={departments.create().url}
-                    getEditRoute={(id: string) =>
-                        departments.edit(parseInt(id)).url
-                    }
+                    getEditRoute={(id: number) => departments.edit(id).url}
                 />
             </div>
         </AppLayout>

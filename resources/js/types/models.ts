@@ -1,18 +1,32 @@
 interface Base {
-    id: string;
+    id: number;
     created_at: string;
     updated_at: string;
 }
 
 export type Department = {
-    id: string;
     title: string;
+} & Base;
+
+export type Actor = {
+    first_name: string;
+    last_name: string;
+    characters: Character[];
 } & Base;
 
 export type Character = {
     first_name: string;
     last_name: string;
     sex: 'Male' | 'Female';
+    actor_id: string;
+    actor: Actor;
+} & Base;
+
+export type Role = {
+    title: string;
+    start_date: string;
+    end_date: string;
+    character: Character;
 } & Base;
 
 export type Season = {

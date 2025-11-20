@@ -3,23 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actor;
-use App\Models\Character;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class CharacterController extends Controller {
+class ActorController extends Controller {
     /**
      * Display a listing of the resource.
      */
     public function index() {
-        return Inertia::render('characters/index', ['data' => Character::with("actor")->get()]);
+        return Inertia::render('actors/index', ['data' => Actor::with("characters")->get()]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return Inertia::render('characters/create', ['actors' => Actor::all()]);
+        return Inertia::render('actors/create');
     }
 
     /**
@@ -29,50 +28,42 @@ class CharacterController extends Controller {
         $valid = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'sex' => 'required|in:Male,Female',
-            'actor_id' => 'required|exists:actors,id',
         ]);
 
-        Character::create([
+        Actor::create([
             'first_name' => $valid['first_name'],
             'last_name' => $valid['last_name'],
-            'sex' => $valid['sex'],
-            'actor_id' => $valid['actor_id'],
         ]);
 
-        return redirect()->route('characters.index');
+        return redirect()->route('actors.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Character $character) {
+    public function show(Actor $actor) {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Character $character) {
-        return Inertia::render('characters/edit', ['character' => $character, 'actors' => Actor::all()]);
+    public function edit(Actor $actor) {
+        return Inertia::render('actors/edit', ['actor' => $actor]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Character $character) {
+    public function update(Request $request, Actor $actor) {
         $valid = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'sex' => 'required|in:Male,Female',
-            'actor_id' => 'required|exists:actors,id',
         ]);
 
-        $character->update([
+        $actor->update([
             'first_name' => $valid['first_name'],
             'last_name' => $valid['last_name'],
-            'sex' => $valid['sex'],
-            'actor_id' => $valid['actor_id'],
         ]);
 
         return back();
@@ -81,7 +72,7 @@ class CharacterController extends Controller {
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Character $character) {
-        $character->delete();
+    public function destroy(Actor $actor): void {
+        $actor->delete();
     }
 }

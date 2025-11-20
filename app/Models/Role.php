@@ -3,11 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Role extends Model
-{
-    public function character() : HasOne {
-        return $this->hasOne(Character::class);
+class Role extends Model {
+    public function character(): BelongsTo {
+        return $this->belongsTo(Character::class);
     }
 }
