@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Season;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class SeasonController extends Controller {
@@ -26,7 +27,7 @@ class SeasonController extends Controller {
      */
     public function store(Request $request) {
         $valid = $request->validate([
-            'number' => 'required|numeric|unique:seasons,number',
+            'number' => ['required', 'numeric', Rule::unique('seasons', 'number')],
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'overview' => 'required|max:255',
@@ -61,7 +62,7 @@ class SeasonController extends Controller {
      */
     public function update(Request $request, Season $season) {
         $valid = $request->validate([
-            'number' => "required|numeric|unique:seasons,number,{$season->id}",
+            'number' => ['required', 'numeric', Rule::unique('seasons', 'number')->ignore($season->id)],
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'overview' => 'required|max:255',
