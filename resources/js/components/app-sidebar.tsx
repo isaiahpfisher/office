@@ -13,6 +13,7 @@ import { chat } from '@/routes';
 import actors from '@/routes/actors';
 import branches from '@/routes/branches';
 import characters from '@/routes/characters';
+import coldOpens from '@/routes/cold-opens';
 import departments from '@/routes/departments';
 import episodes from '@/routes/episodes';
 import pranks from '@/routes/pranks';
@@ -102,7 +103,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Cold Opens',
-        href: '/todo',
+        href: coldOpens.index(),
         icon: PopcornIcon,
     },
 ];

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\ColdOpenController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\PrankController;
@@ -64,7 +65,7 @@ Route::controller(EpisodeController::class)->group(function () {
     Route::delete('/episodes/{episode}', 'destroy')->name('episodes.destroy');
 });
 
-Route::controller(EpisodeController::class)->group(function () {
+Route::controller(ColdOpenController::class)->group(function () {
     Route::get('/cold-opens', 'index')->name('cold-opens.index');
     Route::get('/cold-opens/create', 'create')->name('cold-opens.create');
     Route::get('/cold-opens/{coldOpen}', 'edit')->name('cold-opens.edit');
