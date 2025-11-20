@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SeasonController;
 use Illuminate\Support\Facades\Route;
@@ -60,4 +61,22 @@ Route::controller(SeasonController::class)->group(function () {
     Route::post('/seasons', 'store')->name('seasons.store');
     Route::patch('/seasons/{season}', 'update')->name('seasons.update');
     Route::delete('/seasons/{season}', 'destroy')->name('seasons.destroy');
+});
+
+Route::controller(EpisodeController::class)->group(function () {
+    Route::get('/episodes', 'index')->name('episodes.index');
+    Route::get('/episodes/create', 'create')->name('episodes.create');
+    Route::get('/episodes/{episode}', 'edit')->name('episodes.edit');
+    Route::post('/episodes', 'store')->name('episodes.store');
+    Route::patch('/episodes/{episode}', 'update')->name('episodes.update');
+    Route::delete('/episodes/{episode}', 'destroy')->name('episodes.destroy');
+});
+
+Route::controller(EpisodeController::class)->group(function () {
+    Route::get('/cold-opens', 'index')->name('cold-opens.index');
+    Route::get('/cold-opens/create', 'create')->name('cold-opens.create');
+    Route::get('/cold-opens/{coldOpen}', 'edit')->name('cold-opens.edit');
+    Route::post('/cold-opens', 'store')->name('cold-opens.store');
+    Route::patch('/cold-opens/{coldOpen}', 'update')->name('cold-opens.update');
+    Route::delete('/cold-opens/{coldOpen}', 'destroy')->name('cold-opens.destroy');
 });

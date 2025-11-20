@@ -35,3 +35,18 @@ export type Season = {
     end_date: string;
     overview: string;
 } & Base;
+
+export type Episode = {
+    title: string;
+    summary: string;
+    air_date: string;
+    season_id: string;
+    season: Season;
+    cold_open: ColdOpen;
+} & Base;
+
+export type ColdOpen = {
+    description: string;
+    episode_id: string;
+    episode: Episode;
+} & Base;

@@ -13,6 +13,7 @@ import { chat } from '@/routes';
 import actors from '@/routes/actors';
 import characters from '@/routes/characters';
 import departments from '@/routes/departments';
+import episodes from '@/routes/episodes';
 import roles from '@/routes/roles';
 import seasons from '@/routes/seasons';
 import { type NavItem } from '@/types';
@@ -64,7 +65,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Episodes',
-        href: '/todo',
+        href: episodes.index(),
         icon: ClapperboardIcon,
     },
     {
