@@ -84,3 +84,10 @@ export type Relationship = {
     person_two_id: string;
     person_two: Character;
 } & Base;
+
+export type Affair = {
+    cheating_id: string;
+    cheating: Relationship;
+    cheated_id: string;
+    cheated: Relationship;
+} & Base;

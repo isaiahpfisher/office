@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActorController;
+use App\Http\Controllers\AffairController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\ColdOpenController;
@@ -129,4 +130,13 @@ Route::controller(RelationshipController::class)->group(function () {
     Route::post('/relationships', 'store')->name('relationships.store');
     Route::patch('/relationships/{relationship}', 'update')->name('relationships.update');
     Route::delete('/relationships/{relationship}', 'destroy')->name('relationships.destroy');
+});
+
+Route::controller(AffairController::class)->group(function () {
+    Route::get('/affairs', action: 'index')->name('affairs.index');
+    Route::get('/affairs/create', 'create')->name('affairs.create');
+    Route::get('/affairs/{affair}', 'edit')->name('affairs.edit');
+    Route::post('/affairs', 'store')->name('affairs.store');
+    Route::patch('/affairs/{affair}', 'update')->name('affairs.update');
+    Route::delete('/affairs/{affair}', 'destroy')->name('affairs.destroy');
 });

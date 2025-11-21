@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/sidebar';
 import { chat } from '@/routes';
 import actors from '@/routes/actors';
+import affairs from '@/routes/affairs';
 import branches from '@/routes/branches';
 import characters from '@/routes/characters';
 import coldOpens from '@/routes/cold-opens';
@@ -30,6 +31,7 @@ import {
     FilmIcon,
     GithubIcon,
     GlobeIcon,
+    HeartCrackIcon,
     HeartHandshakeIcon,
     LaughIcon,
     LayersIcon,
@@ -93,6 +95,11 @@ const mainNavItems: NavItem[] = [
         title: 'Relationships',
         href: relationships.index(),
         icon: HeartHandshakeIcon,
+    },
+    {
+        title: 'Affairs',
+        href: affairs.index(),
+        icon: HeartCrackIcon,
     },
     {
         title: 'Quotes',
