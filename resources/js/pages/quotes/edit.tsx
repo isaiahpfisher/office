@@ -13,7 +13,7 @@ const schema = z.object({
     character_id: z.number(),
 });
 
-export default function ThingsSheSaidEdit({
+export default function QuotesEdit({
     quote,
     episodes,
     characters,

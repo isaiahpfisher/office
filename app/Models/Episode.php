@@ -16,7 +16,7 @@ class Episode extends Model {
     }
 
     public function thingsSheSaid(): HasMany {
-        return $this->hasMany(ThingsSheSaid::class);
+        return $this->hasMany(ThingSheSaid::class);
     }
 
     public function quotes(): HasMany {

@@ -18,6 +18,7 @@ import departments from '@/routes/departments';
 import episodes from '@/routes/episodes';
 import pranks from '@/routes/pranks';
 import quotes from '@/routes/quotes';
+import relationships from '@/routes/relationships';
 import roles from '@/routes/roles';
 import seasons from '@/routes/seasons';
 import thingsSheSaid from '@/routes/things-she-said';
@@ -90,7 +91,7 @@ const mainNavItems: NavItem[] = [
     },
     {
         title: 'Relationships',
-        href: '/todo',
+        href: relationships.index(),
         icon: HeartHandshakeIcon,
     },
     {

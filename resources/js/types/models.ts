@@ -76,3 +76,11 @@ export type Quote = {
     character_id: string;
     character: Character;
 } & Base;
+
+export type Relationship = {
+    outcome: 'Break Up' | 'Marriage' | 'Other';
+    person_one_id: string;
+    person_one: Character;
+    person_two_id: string;
+    person_two: Character;
+} & Base;
