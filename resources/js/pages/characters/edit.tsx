@@ -39,8 +39,6 @@ export default function CharactersEdit({
         });
     };
 
-    console.log(character);
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Edit Character" />

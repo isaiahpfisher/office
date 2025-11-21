@@ -39,8 +39,6 @@ export default function EpisodesEdit({
         });
     };
 
-    console.log(episode);
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Edit Episode" />
