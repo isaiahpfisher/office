@@ -1,4 +1,5 @@
 import { AutoForm } from '@/components/form/auto-form';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
 import characters from '@/routes/characters';
 import { type BreadcrumbItem } from '@/types';
@@ -6,6 +7,10 @@ import { Actor, Character } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
+import CharactersQuotes from './quotes';
+import CharactersRelationships from './relationships';
+import CharactersRoles from './roles';
+import CharactersThingsSheSaid from './things-she-said';
 
 const schema = z.object({
     first_name: z.string(),
@@ -42,49 +47,90 @@ export default function CharactersEdit({
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Edit Character" />
-            <div className="h-full p-6">
-                <AutoForm
-                    title={`Edit ${character.first_name} ${character.last_name}`}
-                    description="Update the details of this character."
-                    schema={schema}
-                    onSubmit={handleSubmit}
-                    columns={2}
-                    defaultValues={{ ...character }}
-                    fields={[
-                        {
-                            type: 'text',
-                            name: 'first_name',
-                            label: 'First Name',
-                            placeholder: 'John',
-                        },
-                        {
-                            type: 'text',
-                            name: 'last_name',
-                            label: 'Last Name',
-                            placeholder: 'Doe',
-                        },
-                        {
-                            type: 'select',
-                            name: 'sex',
-                            label: 'Sex',
-                            placeholder: 'Choose an option',
-                            options: [
-                                { label: 'Male', value: 'Male' },
-                                { label: 'Female', value: 'Female' },
-                            ],
-                        },
-                        {
-                            type: 'select',
-                            name: 'actor_id',
-                            label: 'Actor',
-                            placeholder: 'Choose an option',
-                            options: actors.map((actor) => ({
-                                label: `${actor.first_name} ${actor.last_name}`,
-                                value: actor.id,
-                            })),
-                        },
-                    ]}
-                />
+            <div className="h-full space-y-6 p-6">
+                <div className="mx-auto w-full sm:max-w-5xl">
+                    <Tabs defaultValue="edit">
+                        <TabsList>
+                            <TabsTrigger value="edit">Edit</TabsTrigger>
+                            <TabsTrigger value="roles">Roles</TabsTrigger>
+                            <TabsTrigger value="branches">Branches</TabsTrigger>
+                            <TabsTrigger value="episodes">Episodes</TabsTrigger>
+                            <TabsTrigger value="relationships">
+                                Relationships
+                            </TabsTrigger>
+                            <TabsTrigger value="thingsSheSaid">
+                                Things She Said
+                            </TabsTrigger>
+                            <TabsTrigger value="quotes">Quotes</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="edit">
+                            <AutoForm
+                                title={`Edit ${character.first_name} ${character.last_name}`}
+                                description="Update the details of this character."
+                                schema={schema}
+                                onSubmit={handleSubmit}
+                                columns={2}
+                                defaultValues={{ ...character }}
+                                fields={[
+                                    {
+                                        type: 'text',
+                                        name: 'first_name',
+                                        label: 'First Name',
+                                        placeholder: 'John',
+                                    },
+                                    {
+                                        type: 'text',
+                                        name: 'last_name',
+                                        label: 'Last Name',
+                                        placeholder: 'Doe',
+                                    },
+                                    {
+                                        type: 'select',
+                                        name: 'sex',
+                                        label: 'Sex',
+                                        placeholder: 'Choose an option',
+                                        options: [
+                                            {
+                                                label: 'Male',
+                                                value: 'Male',
+                                            },
+                                            {
+                                                label: 'Female',
+                                                value: 'Female',
+                                            },
+                                        ],
+                                    },
+                                    {
+                                        type: 'select',
+                                        name: 'actor_id',
+                                        label: 'Actor',
+                                        placeholder: 'Choose an option',
+                                        options: actors.map((actor) => ({
+                                            label: `${actor.first_name} ${actor.last_name}`,
+                                            value: actor.id,
+                                        })),
+                                    },
+                                ]}
+                            />
+                        </TabsContent>
+                        <TabsContent value="roles">
+                            <CharactersRoles data={character.roles} />
+                        </TabsContent>
+                        <TabsContent value="relationships">
+                            <CharactersRelationships
+                                data={character.relationships}
+                            />
+                        </TabsContent>
+                        <TabsContent value="thingsSheSaid">
+                            <CharactersThingsSheSaid
+                                data={character.things_she_said}
+                            />
+                        </TabsContent>
+                        <TabsContent value="quotes">
+                            <CharactersQuotes data={character.quotes} />
+                        </TabsContent>
+                    </Tabs>
+                </div>
             </div>
         </AppLayout>
     );

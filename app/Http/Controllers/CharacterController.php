@@ -54,7 +54,19 @@ class CharacterController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Character $character) {
-        return Inertia::render('characters/edit', ['character' => $character, 'actors' => Actor::all()]);
+        return Inertia::render('characters/edit', [
+            'character' => $character->load([
+                'roles',
+                'relationshipsOne.personOne',
+                'relationshipsOne.personTwo',
+                'relationshipsTwo.personOne',
+                'relationshipsTwo.personTwo',
+                'thingsSheSaid.episode',
+                'quotes.episode'
+            ])
+                ->append('relationships'),
+            'actors' => Actor::all(),
+        ]);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -26,16 +27,26 @@ class Character extends Model {
         return $this->hasMany(Episode::class);
     }
 
-    public function relationships(): HasMany {
-        return $this->hasMany(Relationship::class);
+    public function relationshipsOne(): HasMany {
+        return $this->hasMany(Relationship::class, 'person_one_id');
+    }
+
+    public function relationshipsTwo(): HasMany {
+        return $this->hasMany(Relationship::class, 'person_two_id');
+    }
+
+    protected function relationships(): Attribute {
+        return Attribute::make(
+            get: fn() => $this->relationshipsOne->merge($this->relationshipsTwo)
+        );
     }
 
     public function quotes(): HasMany {
         return $this->hasMany(Quote::class);
     }
 
-    public function things_she_said(): HasMany {
-        return $this->hasMany(ThingsSheSaid::class);
+    public function thingsSheSaid(): HasMany {
+        return $this->hasMany(ThingSheSaid::class);
     }
 
     public function roles(): HasMany {

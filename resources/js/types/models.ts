@@ -16,6 +16,10 @@ export type Character = {
     sex: 'Male' | 'Female';
     actor_id: string;
     actor: Actor;
+    roles: Role[];
+    relationships: Relationship[];
+    things_she_said: ThingSheSaid[];
+    quotes: Quote[];
 } & Base;
 
 export type Role = {

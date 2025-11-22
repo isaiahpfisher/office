@@ -13,10 +13,10 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('thing_she_saids', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->text('saying');
             $table->foreignIdFor(Episode::class);
             $table->foreignIdFor(Character::class);
+            $table->timestamps();
         });
     }
 

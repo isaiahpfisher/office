@@ -36,7 +36,7 @@ import { useState } from 'react';
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
-    title: string;
+    title?: string;
     description?: string;
     createRoute: string;
     getEditRoute: (id: number) => string;
@@ -87,7 +87,7 @@ export function DataTable<TData, TValue>({
 
     return (
         <div>
-            <Heading title={title} description={description} />
+            {title && <Heading title={title} description={description} />}
             <div className="flex items-center justify-between py-4">
                 <Input
                     placeholder="Search all columns..."
