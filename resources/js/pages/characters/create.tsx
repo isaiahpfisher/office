@@ -2,7 +2,7 @@ import { AutoForm } from '@/components/form/auto-form';
 import AppLayout from '@/layouts/app-layout';
 import characters from '@/routes/characters';
 import { type BreadcrumbItem } from '@/types';
-import { Actor } from '@/types/models';
+import { Actor, Department } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -17,9 +17,16 @@ const schema = z.object({
     last_name: z.string(),
     sex: z.enum(['Male', 'Female']),
     actor_id: z.number(),
+    department_id: z.number(),
 });
 
-export default function CharactersCreate({ actors }: { actors: Actor[] }) {
+export default function CharactersCreate({
+    actors,
+    departments,
+}: {
+    actors: Actor[];
+    departments: Department[];
+}) {
     const handleSubmit = (values: any) => {
         router.post(characters.store(), values, {
             onError: (errors) => {
@@ -38,7 +45,7 @@ export default function CharactersCreate({ actors }: { actors: Actor[] }) {
                     title="Create Character"
                     description="Add a new character to our database."
                     schema={schema}
-                    columns={2}
+                    columns={3}
                     onSubmit={handleSubmit}
                     defaultValues={{}}
                     fields={[
@@ -72,6 +79,16 @@ export default function CharactersCreate({ actors }: { actors: Actor[] }) {
                             options: actors.map((actor) => ({
                                 label: `${actor.first_name} ${actor.last_name}`,
                                 value: actor.id,
+                            })),
+                        },
+                        {
+                            type: 'select',
+                            name: 'department_id',
+                            label: 'Department',
+                            placeholder: 'Choose an option',
+                            options: departments.map((department) => ({
+                                label: `${department.title}`,
+                                value: department.id,
                             })),
                         },
                     ]}

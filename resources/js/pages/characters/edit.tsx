@@ -3,7 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
 import characters from '@/routes/characters';
 import { type BreadcrumbItem } from '@/types';
-import { Actor, Branch, Character, Episode } from '@/types/models';
+import { Actor, Branch, Character, Department, Episode } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
@@ -19,16 +19,19 @@ const schema = z.object({
     last_name: z.string(),
     sex: z.enum(['Male', 'Female']),
     actor_id: z.number(),
+    department_id: z.number(),
 });
 
 export default function CharactersEdit({
     character,
     actors,
+    departments,
     branches,
     episodes,
 }: {
     character: Character;
     actors: Actor[];
+    departments: Department[];
     branches: Branch[];
     episodes: Episode[];
 }) {
@@ -75,7 +78,7 @@ export default function CharactersEdit({
                                 description="Update the details of this character."
                                 schema={schema}
                                 onSubmit={handleSubmit}
-                                columns={2}
+                                columns={3}
                                 defaultValues={{ ...character }}
                                 fields={[
                                     {
@@ -96,10 +99,7 @@ export default function CharactersEdit({
                                         label: 'Sex',
                                         placeholder: 'Choose an option',
                                         options: [
-                                            {
-                                                label: 'Male',
-                                                value: 'Male',
-                                            },
+                                            { label: 'Male', value: 'Male' },
                                             {
                                                 label: 'Female',
                                                 value: 'Female',
@@ -109,13 +109,24 @@ export default function CharactersEdit({
                                     {
                                         type: 'select',
                                         name: 'actor_id',
-                                        searchable: true,
                                         label: 'Actor',
                                         placeholder: 'Choose an option',
                                         options: actors.map((actor) => ({
                                             label: `${actor.first_name} ${actor.last_name}`,
                                             value: actor.id,
                                         })),
+                                    },
+                                    {
+                                        type: 'select',
+                                        name: 'department_id',
+                                        label: 'Department',
+                                        placeholder: 'Choose an option',
+                                        options: departments.map(
+                                            (department) => ({
+                                                label: `${department.title}`,
+                                                value: department.id,
+                                            }),
+                                        ),
                                     },
                                 ]}
                             />

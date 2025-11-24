@@ -2,22 +2,12 @@ import { DataTableActionsCell } from '@/components/table/actions-cell';
 import { DataTableColumnHeader } from '@/components/table/column-header';
 import { DataTable } from '@/components/table/data-table';
 import { DataTableLinkCell } from '@/components/table/link-cell';
-import AppLayout from '@/layouts/app-layout';
 import actors from '@/routes/actors';
-import characters from '@/routes/characters';
+import characterRoutes from '@/routes/characters';
 import departments from '@/routes/departments';
-import { type BreadcrumbItem } from '@/types';
 import { Character } from '@/types/models';
-import { Head } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { DramaIcon, LayersIcon } from 'lucide-react';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Characters',
-        href: characters.index().url,
-    },
-];
 
 const columns: ColumnDef<Character>[] = [
     {
@@ -68,27 +58,26 @@ const columns: ColumnDef<Character>[] = [
         id: 'actions',
         cell: ({ row }) => (
             <DataTableActionsCell
-                editRoute={characters.edit(row.original.id).url}
-                deleteRoute={characters.destroy(row.original.id).url}
+                editRoute={characterRoutes.edit(row.original.id).url}
+                deleteRoute={characterRoutes.destroy(row.original.id).url}
             />
         ),
     },
 ];
 
-export default function CharactersIndex({ data }: { data: Character[] }) {
+export default function DepartmentsCharacters({
+    characters,
+}: {
+    characters: Character[];
+}) {
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Characters" />
-            <div className="h-full p-6">
-                <DataTable
-                    title="Characters"
-                    description="Browse characters from the show."
-                    columns={columns}
-                    data={data}
-                    createRoute={characters.create().url}
-                    getEditRoute={(id: number) => characters.edit(id).url}
-                />
-            </div>
-        </AppLayout>
+        <>
+            <DataTable
+                columns={columns}
+                data={characters}
+                createRoute={characterRoutes.create().url}
+                getEditRoute={(id: number) => characterRoutes.edit(id).url}
+            />
+        </>
     );
 }

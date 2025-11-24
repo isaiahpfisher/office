@@ -15,7 +15,9 @@ export type Character = {
     last_name: string;
     sex: 'Male' | 'Female';
     actor_id: string;
+    department_id: string;
     actor: Actor;
+    department: Department;
     roles: Role[];
     relationships: Relationship[];
     things_she_said: ThingSheSaid[];
@@ -56,6 +58,7 @@ export type ColdOpen = {
 
 export type Department = {
     title: string;
+    characters: Character[];
 } & Base;
 
 export type Branch = {

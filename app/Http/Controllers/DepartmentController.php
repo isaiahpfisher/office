@@ -47,7 +47,7 @@ class DepartmentController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Department $department) {
-        return Inertia::render('departments/edit', ['department' => $department]);
+        return Inertia::render('departments/edit', ['department' => $department->load('characters')]);
     }
 
     /**

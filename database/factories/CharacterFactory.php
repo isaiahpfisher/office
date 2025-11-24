@@ -18,7 +18,8 @@ class CharacterFactory extends Factory {
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
             'sex' => fake()->randomElement(['Male', 'Female']),
-            'actor_id' => 1
+            'actor_id' => 1,
+            'department_id' => 1,
         ];
     }
 }

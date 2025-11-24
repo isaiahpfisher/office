@@ -14,10 +14,10 @@ class Character extends Model {
     /** @use HasFactory<\Database\Factories\CharacterFactory> */
     use HasFactory;
 
-    protected $guarded = [];
+    protected $with = ['actor', 'department'];
 
-    public function department(): HasOne {
-        return $this->hasOne(Department::class);
+    public function department(): BelongsTo {
+        return $this->belongsTo(Department::class);
     }
 
     public function actor(): BelongsTo {

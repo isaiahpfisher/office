@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Actor;
 use App\Models\Branch;
 use App\Models\Character;
+use App\Models\Department;
 use App\Models\Episode;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -14,14 +15,14 @@ class CharacterController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        return Inertia::render('characters/index', ['data' => Character::with("actor")->get()]);
+        return Inertia::render('characters/index', ['data' => Character::with(["actor", "department"])->get()]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create() {
-        return Inertia::render('characters/create', ['actors' => Actor::all()]);
+        return Inertia::render('characters/create', ['actors' => Actor::latest()->get(), 'departments' => Department::latest()->get()]);
     }
 
     /**
@@ -33,6 +34,7 @@ class CharacterController extends Controller {
             'last_name' => 'required',
             'sex' => 'required|in:Male,Female',
             'actor_id' => 'required|exists:actors,id',
+            'department_id' => 'required|exists:departments,id',
         ]);
 
         Character::create([
@@ -40,6 +42,7 @@ class CharacterController extends Controller {
             'last_name' => $valid['last_name'],
             'sex' => $valid['sex'],
             'actor_id' => $valid['actor_id'],
+            'department_id' => $valid['department_id'],
         ]);
 
         return redirect()->route('characters.index');
@@ -71,6 +74,7 @@ class CharacterController extends Controller {
                 ->append('relationships'),
             'actors' => Actor::all(),
             'branches' => Branch::latest()->get(),
+            'departments' => Department::latest()->get(),
             'episodes' => Episode::latest()->get(),
         ]);
     }
@@ -84,6 +88,7 @@ class CharacterController extends Controller {
             'last_name' => 'required',
             'sex' => 'required|in:Male,Female',
             'actor_id' => 'required|exists:actors,id',
+            'department_id' => 'required|exists:departments,id',
         ]);
 
         $character->update([
@@ -91,6 +96,7 @@ class CharacterController extends Controller {
             'last_name' => $valid['last_name'],
             'sex' => $valid['sex'],
             'actor_id' => $valid['actor_id'],
+            'department_id' => $valid['department_id'],
         ]);
 
         return back();
