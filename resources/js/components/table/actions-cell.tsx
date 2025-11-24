@@ -10,7 +10,7 @@ import { Button } from '../ui/button';
 
 interface DataTableCheckActionsrops
     extends React.HTMLAttributes<HTMLDivElement> {
-    editRoute: string;
+    editRoute?: string;
     deleteRoute: string;
 }
 
@@ -31,12 +31,14 @@ export function DataTableActionsCell({
                     align="end"
                     onClick={(e) => e.stopPropagation()}
                 >
-                    <DropdownMenuItem asChild>
-                        <Link href={editRoute}>
-                            <EditIcon />
-                            Edit
-                        </Link>
-                    </DropdownMenuItem>
+                    {editRoute && (
+                        <DropdownMenuItem asChild>
+                            <Link href={editRoute}>
+                                <EditIcon />
+                                Edit
+                            </Link>
+                        </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem
                         className="w-full text-destructive-foreground hover:text-destructive-foreground!"
                         asChild

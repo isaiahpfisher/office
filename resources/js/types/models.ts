@@ -20,6 +20,8 @@ export type Character = {
     relationships: Relationship[];
     things_she_said: ThingSheSaid[];
     quotes: Quote[];
+    branches: Branch[];
+    episodes: Episode[];
 } & Base;
 
 export type Role = {

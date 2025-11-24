@@ -3,10 +3,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import AppLayout from '@/layouts/app-layout';
 import characters from '@/routes/characters';
 import { type BreadcrumbItem } from '@/types';
-import { Actor, Character } from '@/types/models';
+import { Actor, Branch, Character, Episode } from '@/types/models';
 import { Head, router } from '@inertiajs/react';
 import { toast } from 'sonner';
 import * as z from 'zod';
+import CharactersBranches from './branches';
+import CharactersEpisodes from './episodes';
 import CharactersQuotes from './quotes';
 import CharactersRelationships from './relationships';
 import CharactersRoles from './roles';
@@ -22,9 +24,13 @@ const schema = z.object({
 export default function CharactersEdit({
     character,
     actors,
+    branches,
+    episodes,
 }: {
     character: Character;
     actors: Actor[];
+    branches: Branch[];
+    episodes: Episode[];
 }) {
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Characters', href: characters.index().url },
@@ -103,6 +109,7 @@ export default function CharactersEdit({
                                     {
                                         type: 'select',
                                         name: 'actor_id',
+                                        searchable: true,
                                         label: 'Actor',
                                         placeholder: 'Choose an option',
                                         options: actors.map((actor) => ({
@@ -128,6 +135,18 @@ export default function CharactersEdit({
                         </TabsContent>
                         <TabsContent value="quotes">
                             <CharactersQuotes data={character.quotes} />
+                        </TabsContent>
+                        <TabsContent value="branches">
+                            <CharactersBranches
+                                character={character}
+                                branches={branches}
+                            />
+                        </TabsContent>
+                        <TabsContent value="episodes">
+                            <CharactersEpisodes
+                                character={character}
+                                episodes={episodes}
+                            />
                         </TabsContent>
                     </Tabs>
                 </div>

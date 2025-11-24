@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\ActorController;
 use App\Http\Controllers\AffairController;
+use App\Http\Controllers\BranchCharacterController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\CharacterEpisodeController;
 use App\Http\Controllers\ColdOpenController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EpisodeController;
@@ -139,4 +141,14 @@ Route::controller(AffairController::class)->group(function () {
     Route::post('/affairs', 'store')->name('affairs.store');
     Route::patch('/affairs/{affair}', 'update')->name('affairs.update');
     Route::delete('/affairs/{affair}', 'destroy')->name('affairs.destroy');
+});
+
+Route::controller(BranchCharacterController::class)->group(function () {
+    Route::post('/branch-characters', 'store')->name('branch-characters.store');
+    Route::delete('/branch-characters/{character}/{branchId}', 'destroy')->name('branch-characters.destroy');
+});
+
+Route::controller(CharacterEpisodeController::class)->group(function () {
+    Route::post('/character-episodes', 'store')->name('character-episodes.store');
+    Route::delete('/character-episodes/{character}/{episodeId}', 'destroy')->name('character-episodes.destroy');
 });

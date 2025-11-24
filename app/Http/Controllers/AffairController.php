@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Relationship;
-use App\Models\Episode;
 use App\Models\Affair;
 use Illuminate\Http\Request;
 use Inertia\Inertia;

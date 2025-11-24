@@ -135,7 +135,6 @@ export function AutoForm({
                 values[field.name] = String(val);
             }
 
-            // Only parse Dates. Do NOT convert numbers to strings here.
             if (field.type === 'date' && typeof val === 'string') {
                 values[field.name] = new Date(val);
             }
@@ -253,12 +252,10 @@ export function AutoForm({
                                                 {field.type === 'select' &&
                                                     !field.searchable && (
                                                         <Select
-                                                            // FIX 2: Convert number to string for UI display only
                                                             value={fieldApi.state.value?.toString()}
                                                             onValueChange={(
                                                                 val,
                                                             ) => {
-                                                                // FIX 3: Find original option to restore the correct type (number or string)
                                                                 const selectedOption =
                                                                     field.options.find(
                                                                         (o) =>
@@ -319,7 +316,6 @@ export function AutoForm({
                                                                 fieldApi.state
                                                                     .value
                                                             }
-                                                            // FIX 4: Pass the raw value (number/string) back to form state
                                                             onChange={(val) =>
                                                                 fieldApi.handleChange(
                                                                     val,
@@ -396,7 +392,7 @@ export function AutoForm({
     );
 }
 
-function ComboboxField({
+export function ComboboxField({
     fieldName,
     value,
     onChange,
@@ -405,8 +401,8 @@ function ComboboxField({
     isInvalid,
 }: {
     fieldName: string;
-    value: string | number; // Value can be number
-    onChange: (value: string | number) => void; // Output can be number
+    value: string | number;
+    onChange: (value: string | number) => void;
     placeholder?: string;
     options: { label: string; value: string | number }[];
     isInvalid: boolean;
@@ -426,7 +422,7 @@ function ComboboxField({
                     role="combobox"
                     aria-expanded={open}
                     className={cn(
-                        'flex items-center justify-between hover:bg-background data-[state=open]:border-ring data-[state=open]:ring-[3px] data-[state=open]:ring-ring/50',
+                        'flex w-full items-center justify-between hover:bg-background data-[state=open]:border-ring data-[state=open]:ring-[3px] data-[state=open]:ring-ring/50',
                         !value && 'text-muted-foreground',
                         isInvalid ? 'border-red-500' : 'border-input',
                     )}
@@ -446,7 +442,6 @@ function ComboboxField({
                                     key={opt.value.toString()}
                                     value={opt.label}
                                     onSelect={() => {
-                                        // FIX 5: Pass raw opt.value (number) instead of toString()
                                         onChange(opt.value);
                                         setOpen(false);
                                     }}

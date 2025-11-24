@@ -48,7 +48,8 @@ export function DataTablePagination<TData>({
             </div>
             <div className="flex items-center space-x-2">
                 <div className="mr-4 flex w-[100px] items-center justify-center text-sm font-medium">
-                    Page {pagination.pageIndex + 1} of {table.getPageCount()}
+                    Page {pagination.pageIndex + 1} of{' '}
+                    {Math.max(1, table.getPageCount())}
                 </div>
                 <Button
                     variant="outline"
@@ -75,7 +76,10 @@ export function DataTablePagination<TData>({
                     size="icon"
                     className="size-8"
                     onClick={() => table.nextPage()}
-                    disabled={pagination.pageIndex === table.getPageCount() - 1}
+                    disabled={
+                        pagination.pageIndex ===
+                        Math.max(0, table.getPageCount() - 1)
+                    }
                 >
                     <span className="sr-only">Go to next page</span>
                     <ChevronRight />
@@ -85,7 +89,10 @@ export function DataTablePagination<TData>({
                     size="icon"
                     className="hidden size-8 lg:flex"
                     onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                    disabled={pagination.pageIndex === table.getPageCount() - 1}
+                    disabled={
+                        pagination.pageIndex ===
+                        Math.max(0, table.getPageCount() - 1)
+                    }
                 >
                     <span className="sr-only">Go to last page</span>
                     <ChevronsRight />

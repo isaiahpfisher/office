@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actor;
+use App\Models\Branch;
 use App\Models\Character;
+use App\Models\Episode;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -62,10 +64,14 @@ class CharacterController extends Controller {
                 'relationshipsTwo.personOne',
                 'relationshipsTwo.personTwo',
                 'thingsSheSaid.episode',
-                'quotes.episode'
+                'quotes.episode',
+                'branches',
+                'episodes',
             ])
                 ->append('relationships'),
             'actors' => Actor::all(),
+            'branches' => Branch::latest()->get(),
+            'episodes' => Episode::latest()->get(),
         ]);
     }
 

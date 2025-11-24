@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Episode extends Model {
     //
-    protected $guarded = [];
+    protected $with = [
+        'season',
+        'coldOpen'
+    ];
 
     public function season(): BelongsTo {
         return $this->belongsTo(Season::class);

@@ -39,7 +39,8 @@ interface DataTableProps<TData, TValue> {
     title?: string;
     description?: string;
     createRoute: string;
-    getEditRoute: (id: number) => string;
+    createAction?: () => void;
+    getEditRoute?: (id: number) => string;
 }
 
 export function DataTable<TData, TValue>({
@@ -48,6 +49,7 @@ export function DataTable<TData, TValue>({
     title,
     description,
     createRoute,
+    createAction,
     getEditRoute,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
@@ -126,12 +128,19 @@ export function DataTable<TData, TValue>({
                                 })}
                         </DropdownMenuContent>
                     </DropdownMenu>
-                    <Button asChild size={'sm'}>
-                        <Link prefetch href={createRoute}>
+                    {createAction ? (
+                        <Button onClick={createAction}>
                             <PlusIcon />
                             Create
-                        </Link>
-                    </Button>
+                        </Button>
+                    ) : (
+                        <Button asChild size={'sm'}>
+                            <Link prefetch href={createRoute}>
+                                <PlusIcon />
+                                Create
+                            </Link>
+                        </Button>
+                    )}
                 </div>
             </div>
             <div className="overflow-hidden rounded-md border">
@@ -162,6 +171,7 @@ export function DataTable<TData, TValue>({
                                     key={row.id}
                                     className="cursor-pointer"
                                     onClick={() =>
+                                        getEditRoute &&
                                         router.get(
                                             getEditRoute(row.original.id),
                                         )
