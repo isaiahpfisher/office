@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actor;
+use App\Models\Character;
 use App\Models\Episode;
 use App\Models\Season;
 use Illuminate\Http\Request;
@@ -55,7 +56,11 @@ class EpisodeController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Episode $episode) {
-        return Inertia::render('episodes/edit', ['episode' => $episode, 'seasons' => Season::orderBy('number')->get()]);
+        return Inertia::render('episodes/edit', [
+            'episode' => $episode->load('characters', 'quotes.character', 'thingsSheSaid.character', 'pranks'),
+            'seasons' => Season::orderBy('number')->get(),
+            'characters' => Character::latest()->get()
+        ]);
     }
 
     /**

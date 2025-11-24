@@ -48,6 +48,10 @@ export type Episode = {
     season_id: string;
     season: Season;
     cold_open: ColdOpen;
+    characters: Character[];
+    quotes: Quote[];
+    things_she_said: ThingSheSaid[];
+    pranks: Prank[];
 } & Base;
 
 export type ColdOpen = {

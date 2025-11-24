@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -26,8 +27,8 @@ class Episode extends Model {
         return $this->hasMany(Quote::class);
     }
 
-    public function characters(): HasMany {
-        return $this->hasMany(Character::class);
+    public function characters(): BelongsToMany {
+        return $this->belongsToMany(Character::class, 'character_episodes');
     }
 
     public function coldOpen(): HasOne {
