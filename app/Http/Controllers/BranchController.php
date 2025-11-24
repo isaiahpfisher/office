@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Branch;
+use App\Models\Character;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -47,7 +48,10 @@ class BranchController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Branch $branch) {
-        return Inertia::render('branches/edit', ['branch' => $branch]);
+        return Inertia::render('branches/edit', [
+            'branch' => $branch->load('characters'),
+            'characters' => Character::latest()->get(),
+        ]);
     }
 
     /**

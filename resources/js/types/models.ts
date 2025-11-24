@@ -63,6 +63,7 @@ export type Department = {
 
 export type Branch = {
     city: string;
+    characters: Character[];
 } & Base;
 
 export type Prank = {
