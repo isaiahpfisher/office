@@ -4,7 +4,6 @@ import { DataTable } from '@/components/table/data-table';
 import { DataTableLinkCell } from '@/components/table/link-cell';
 import AppLayout from '@/layouts/app-layout';
 import characters from '@/routes/characters';
-import episodes from '@/routes/episodes';
 import relationships from '@/routes/relationships';
 import { type BreadcrumbItem } from '@/types';
 import { Relationship } from '@/types/models';
@@ -28,7 +27,7 @@ const columns: ColumnDef<Relationship>[] = [
         cell: ({ row }) => (
             <DataTableLinkCell
                 label={`${row.original.person_one.first_name} ${row.original.person_one.last_name}`}
-                editRoute={episodes.edit(row.original.person_one.id).url}
+                editRoute={characters.edit(row.original.person_one.id).url}
                 icon={<UsersIcon />}
             />
         ),

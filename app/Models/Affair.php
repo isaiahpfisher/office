@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Affair extends Model {
-    protected $guarded = [];
+    protected $with = ['cheating', 'cheated'];
 
     public function cheating(): BelongsTo {
         return $this->belongsTo(Relationship::class, 'cheating_id');

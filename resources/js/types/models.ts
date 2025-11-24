@@ -98,6 +98,7 @@ export type Relationship = {
     person_one: Character;
     person_two_id: string;
     person_two: Character;
+    affairs: Affair[];
 } & Base;
 
 export type Affair = {

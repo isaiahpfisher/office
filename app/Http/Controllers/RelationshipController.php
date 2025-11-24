@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Affair;
 use App\Models\Character;
 use App\Models\Episode;
 use App\Models\Relationship;
@@ -56,7 +57,7 @@ class RelationshipController extends Controller {
      */
     public function edit(Relationship $relationship) {
         return Inertia::render('relationships/edit', [
-            'relationship' => $relationship->load(['personOne', 'personTwo']),
+            'relationship' => $relationship->load(['personOne', 'personTwo'])->append('affairs'),
             'outcome' => $relationship->load(['personOne', 'personTwo']),
             'characters' => Character::latest()->get(),
         ]);
