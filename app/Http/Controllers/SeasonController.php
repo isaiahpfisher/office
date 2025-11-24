@@ -54,7 +54,7 @@ class SeasonController extends Controller {
      * Show the form for editing the specified resource.
      */
     public function edit(Season $season) {
-        return Inertia::render("seasons/edit", ['season' => $season]);
+        return Inertia::render("seasons/edit", ['season' => $season->load('episodes')]);
     }
 
     /**

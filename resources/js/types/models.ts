@@ -36,6 +36,7 @@ export type Season = {
     start_date: string;
     end_date: string;
     overview: string;
+    episodes: Episode[];
 } & Base;
 
 export type Episode = {
