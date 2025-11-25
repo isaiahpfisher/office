@@ -1,3 +1,4 @@
+import { ComboboxField } from '@/components/form/auto-form';
 import { DataTableActionsCell } from '@/components/table/actions-cell';
 import { DataTableColumnHeader } from '@/components/table/column-header';
 import { DataTable } from '@/components/table/data-table';
@@ -12,19 +13,12 @@ import {
     DialogHeader,
     DialogTitle,
 } from '@/components/ui/dialog';
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select';
 import actors from '@/routes/actors';
 import branchCharacters from '@/routes/branch-characters';
 import characters from '@/routes/characters';
 import departments from '@/routes/departments';
 import { Branch, Character } from '@/types/models';
-import { Form } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react';
 import { ColumnDef } from '@tanstack/react-table';
 import { DramaIcon, LayersIcon } from 'lucide-react';
 import { useState } from 'react';
@@ -38,6 +32,11 @@ export default function BranchesCharacters({
     characters: Character[];
 }) {
     const [attachFormOpen, setAttachFormOpen] = useState(false);
+
+    // Switch to useForm hook to control the Combobox
+    const form = useForm({
+        character_id: '',
+    });
 
     const columns: ColumnDef<Character>[] = [
         {
@@ -101,6 +100,23 @@ export default function BranchesCharacters({
         setAttachFormOpen(true);
     };
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        form.transform((data) => ({
+            ...data,
+            branch_id: branch.id,
+        }));
+
+        form.post(branchCharacters.store().url, {
+            onSuccess: () => {
+                setAttachFormOpen(false);
+                toast.success('Character Attached');
+                form.reset();
+            },
+        });
+    };
+
     return (
         <>
             <DataTable
@@ -111,18 +127,7 @@ export default function BranchesCharacters({
             />
             <Dialog open={attachFormOpen} onOpenChange={setAttachFormOpen}>
                 <DialogContent>
-                    <Form
-                        action={branchCharacters.store()}
-                        transform={(data) => ({
-                            ...data,
-                            branch_id: branch.id,
-                        })}
-                        onSuccess={() => {
-                            setAttachFormOpen(false);
-                            toast.success('Branch Attached');
-                        }}
-                        className="space-y-8"
-                    >
+                    <form onSubmit={handleSubmit} className="space-y-8">
                         <DialogHeader>
                             <DialogTitle>Attach Character</DialogTitle>
                             <DialogDescription>
@@ -130,35 +135,39 @@ export default function BranchesCharacters({
                                 {branch.city} branch.
                             </DialogDescription>
                         </DialogHeader>
-                        <Select name="character_id">
-                            <SelectTrigger>
-                                <SelectValue placeholder="Select a branch" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {allCharacters
+                        <div className="w-full">
+                            <ComboboxField
+                                fieldName="character_id"
+                                value={form.data.character_id}
+                                onChange={(value) =>
+                                    form.setData(
+                                        'character_id',
+                                        value.toString(),
+                                    )
+                                }
+                                isInvalid={
+                                    form.errors.character_id !== undefined
+                                }
+                                placeholder="Select a character..."
+                                options={allCharacters
                                     .filter((character) =>
                                         branch.characters.every(
                                             (c) => c.id !== character.id,
                                         ),
                                     )
-                                    .map((character) => (
-                                        <SelectItem
-                                            value={character.id.toString()}
-                                            key={character.id}
-                                        >
-                                            {character.first_name}{' '}
-                                            {character.last_name}
-                                        </SelectItem>
-                                    ))}
-                            </SelectContent>
-                        </Select>
+                                    .map((character) => ({
+                                        label: `${character.first_name} ${character.last_name}`,
+                                        value: character.id,
+                                    }))}
+                            />
+                        </div>
                         <DialogFooter>
                             <DialogClose asChild>
                                 <Button variant="outline">Cancel</Button>
                             </DialogClose>
                             <Button type="submit">Attach Character</Button>
                         </DialogFooter>
-                    </Form>
+                    </form>
                 </DialogContent>
             </Dialog>
         </>
