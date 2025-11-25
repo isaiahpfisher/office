@@ -502,6 +502,7 @@ function DateField({
                 <Calendar
                     mode="single"
                     selected={value ?? undefined}
+                    captionLayout="dropdown"
                     onSelect={(date) => onChange(date ?? null)}
                     initialFocus
                 />
