@@ -15,6 +15,10 @@ class Episode extends Model {
         'coldOpen'
     ];
 
+    protected $casts = [
+        'air_date' => 'datetime',
+    ];
+
     public function season(): BelongsTo {
         return $this->belongsTo(Season::class);
     }
