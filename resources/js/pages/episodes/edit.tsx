@@ -87,6 +87,7 @@ export default function EpisodesEdit({
                                         type: 'select',
                                         name: 'season_id',
                                         label: 'Season',
+                                        searchable: true,
                                         placeholder: 'Choose an option',
                                         options: seasons.map((season) => ({
                                             label: `Season #${season.number}`,

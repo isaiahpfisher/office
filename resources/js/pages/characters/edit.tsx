@@ -111,6 +111,7 @@ export default function CharactersEdit({
                                         name: 'actor_id',
                                         label: 'Actor',
                                         placeholder: 'Choose an option',
+                                        searchable: true,
                                         options: actors.map((actor) => ({
                                             label: `${actor.first_name} ${actor.last_name}`,
                                             value: actor.id,
@@ -121,6 +122,7 @@ export default function CharactersEdit({
                                         name: 'department_id',
                                         label: 'Department',
                                         placeholder: 'Choose an option',
+                                        searchable: true,
                                         options: departments.map(
                                             (department) => ({
                                                 label: `${department.title}`,

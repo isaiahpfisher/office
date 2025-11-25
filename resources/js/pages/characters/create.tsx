@@ -75,6 +75,7 @@ export default function CharactersCreate({
                             type: 'select',
                             name: 'actor_id',
                             label: 'Actor',
+                            searchable: true,
                             placeholder: 'Choose an option',
                             options: actors.map((actor) => ({
                                 label: `${actor.first_name} ${actor.last_name}`,
@@ -85,6 +86,7 @@ export default function CharactersCreate({
                             type: 'select',
                             name: 'department_id',
                             label: 'Department',
+                            searchable: true,
                             placeholder: 'Choose an option',
                             options: departments.map((department) => ({
                                 label: `${department.title}`,
