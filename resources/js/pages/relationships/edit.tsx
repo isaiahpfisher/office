@@ -12,7 +12,7 @@ import RelationshipsAffairs from './affairs';
 const schema = z.object({
     person_one_id: z.number(),
     person_two_id: z.number(),
-    outcome: z.enum(['Break Up', 'Marriage', 'Other']),
+    outcome: z.enum(['Break Up', 'Marriage', 'Affair', 'Other']),
 });
 
 export default function RelationshipsEdit({
@@ -53,7 +53,7 @@ export default function RelationshipsEdit({
                         <TabsContent value="edit">
                             <AutoForm
                                 title={`Edit ${relationship.person_one.first_name}'s Relationship with ${relationship.person_two.first_name}`}
-                                description="Update the details of this relationship."
+                                description="Test the UNIQUE constraint on the person fields."
                                 schema={schema}
                                 onSubmit={handleSubmit}
                                 columns={3}
@@ -94,6 +94,7 @@ export default function RelationshipsEdit({
                                         options: [
                                             'Break Up',
                                             'Marriage',
+                                            'Affair',
                                             'Other',
                                         ].map((option) => ({
                                             label: option,

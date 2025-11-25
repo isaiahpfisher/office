@@ -75,7 +75,7 @@ class CharacterController extends Controller {
             'actors' => Actor::all(),
             'branches' => Branch::latest()->get(),
             'departments' => Department::latest()->get(),
-            'episodes' => Episode::latest()->get(),
+            'episodes' => Episode::orderBy('air_date')->get(),
         ]);
     }
 

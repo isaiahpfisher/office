@@ -9,12 +9,13 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { chat } from '@/routes';
 import actors from '@/routes/actors';
 import affairs from '@/routes/affairs';
 import branches from '@/routes/branches';
 import characters from '@/routes/characters';
+import chatRoutes from '@/routes/chat';
 import coldOpens from '@/routes/cold-opens';
+import demoRoutes from '@/routes/demo';
 import departments from '@/routes/departments';
 import episodes from '@/routes/episodes';
 import pranks from '@/routes/pranks';
@@ -35,6 +36,7 @@ import {
     HeartHandshakeIcon,
     LaughIcon,
     LayersIcon,
+    ListCheckIcon,
     MapPinHouseIcon,
     MessageCircleXIcon,
     MessagesSquareIcon,
@@ -48,8 +50,13 @@ import AppLogo from './app-logo';
 const mainNavItems: NavItem[] = [
     {
         title: 'Chat',
-        href: chat(),
+        href: chatRoutes.index(),
         icon: MessagesSquareIcon,
+    },
+    {
+        title: 'Demo',
+        href: demoRoutes.index(),
+        icon: ListCheckIcon,
     },
     {
         title: 'Actors',
@@ -138,7 +145,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href={chat()} prefetch>
+                            <Link href={chatRoutes.index()} prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>

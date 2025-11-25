@@ -14,8 +14,8 @@ return new class extends Migration {
         Schema::create('thing_she_saids', function (Blueprint $table) {
             $table->id();
             $table->text('saying');
-            $table->foreignIdFor(Episode::class);
-            $table->foreignIdFor(Character::class);
+            $table->foreignIdFor(Episode::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Character::class)->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

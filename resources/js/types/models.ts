@@ -93,7 +93,7 @@ export type Quote = {
 } & Base;
 
 export type Relationship = {
-    outcome: 'Break Up' | 'Marriage' | 'Other';
+    outcome: 'Break Up' | 'Marriage' | 'Affair' | 'Other';
     person_one_id: string;
     person_one: Character;
     person_two_id: string;

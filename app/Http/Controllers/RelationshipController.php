@@ -33,13 +33,13 @@ class RelationshipController extends Controller {
         $valid = $request->validate([
             'outcome' => 'required',
             'person_one_id' => 'required|exists:characters,id',
-            'person_two_id' => 'required|exists:characters,id',
+            'person_two_id' => 'required|exists:characters,id|different:person_one_id',
         ]);
 
         Relationship::create([
             'outcome' => $valid['outcome'],
-            'person_one_id' => $valid['person_one_id'],
-            'person_two_id' => $valid['person_two_id'],
+            'person_one_id' => min($valid['person_one_id'], $valid['person_two_id']),
+            'person_two_id' => max($valid['person_one_id'], $valid['person_two_id']),
         ]);
 
         return redirect()->route('relationships.index');
@@ -70,13 +70,13 @@ class RelationshipController extends Controller {
         $valid = $request->validate([
             'outcome' => 'required',
             'person_one_id' => 'required|exists:characters,id',
-            'person_two_id' => 'required|exists:characters,id',
+            'person_two_id' => 'required|exists:characters,id|different:person_one_id',
         ]);
 
         $relationship->update([
             'outcome' => $valid['outcome'],
-            'person_one_id' => $valid['person_one_id'],
-            'person_two_id' => $valid['person_two_id'],
+            'person_one_id' => min($valid['person_one_id'], $valid['person_two_id']),
+            'person_two_id' => max($valid['person_one_id'], $valid['person_two_id']),
         ]);
 
         return back();

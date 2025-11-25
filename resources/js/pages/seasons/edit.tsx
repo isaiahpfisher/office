@@ -60,8 +60,6 @@ export default function SeasonsEdit({ season }: { season: Season }) {
                                         name: 'number',
                                         label: 'Season #',
                                         placeholder: '0',
-                                        description:
-                                            'There is a UNIQUE constraint on this field.',
                                     },
                                     {
                                         type: 'date',

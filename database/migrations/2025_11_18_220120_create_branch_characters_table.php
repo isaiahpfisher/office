@@ -13,9 +13,11 @@ return new class extends Migration {
     public function up(): void {
         Schema::create('branch_characters', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Character::class);
-            $table->foreignIdFor(Branch::class);
+            $table->foreignIdFor(Character::class)->constrained()->onDelete('cascade');
+            $table->foreignIdFor(Branch::class)->constrained()->onDelete('cascade');
             $table->timestamps();
+
+            $table->unique(['character_id', 'branch_id']);
         });
     }
 

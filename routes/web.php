@@ -6,7 +6,9 @@ use App\Http\Controllers\BranchCharacterController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\CharacterEpisodeController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ColdOpenController;
+use App\Http\Controllers\DemoController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\PrankController;
@@ -18,13 +20,17 @@ use App\Http\Controllers\ThingSheSaidController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('chat');
-})->name('chat');
+Route::controller(ChatController::class)->group(function () {
+    Route::get('/chat', 'index')->name('chat.index');
+});
 
-Route::get('/characters', function () {
-    return Inertia::render('characters/index');
-})->name('characters.index');
+Route::controller(DemoController::class)->group(function () {
+    Route::get('/demo', 'index')->name('demo.index');
+    Route::get('/demo/all', 'allQuotes')->name('demo.allQuotes');
+    Route::get('/demo/view', 'view')->name('demo.view');
+    Route::get('/demo/joins', 'multipleJoins')->name('demo.multipleJoins');
+    Route::post('/demo/affairs', 'reportAffair')->name('demo.reportAffair');
+});
 
 Route::controller(ActorController::class)->group(function () {
     Route::get('/actors', 'index')->name('actors.index');

@@ -1,14 +1,14 @@
 import { ChatEmpty } from '@/components/chat/chat-empty';
 import ChatInput from '@/components/chat/chat-input';
 import AppLayout from '@/layouts/app-layout';
-import { chat } from '@/routes';
+import chatRoutes from '@/routes/chat';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Chat',
-        href: chat().url,
+        href: chatRoutes.index().url,
     },
 ];
 

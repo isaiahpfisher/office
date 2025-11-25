@@ -15,7 +15,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 const schema = z.object({
     person_one_id: z.number(),
     person_two_id: z.number(),
-    outcome: z.enum(['Break Up', 'Marriage', 'Other']),
+    outcome: z.enum(['Break Up', 'Marriage', 'Affair', 'Other']),
 });
 
 export default function RelationshipsCreate({
@@ -39,7 +39,7 @@ export default function RelationshipsCreate({
             <div className="h-full p-6">
                 <AutoForm
                     title="Create Relationship"
-                    description="Add a new relationship to our database."
+                    description="Test the UNIQUE constraint on the person fields."
                     schema={schema}
                     columns={3}
                     onSubmit={handleSubmit}
@@ -73,12 +73,15 @@ export default function RelationshipsCreate({
                             label: 'Outcome',
                             searchable: true,
                             placeholder: 'Choose an option',
-                            options: ['Break Up', 'Marriage', 'Other'].map(
-                                (option) => ({
-                                    label: option,
-                                    value: option,
-                                }),
-                            ),
+                            options: [
+                                'Break Up',
+                                'Marriage',
+                                'Affair',
+                                'Other',
+                            ].map((option) => ({
+                                label: option,
+                                value: option,
+                            })),
                         },
                     ]}
                 />
