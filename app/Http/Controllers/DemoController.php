@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Affair;
 use App\Models\Character;
 use App\Models\Episode;
 use App\Models\Quote;
@@ -42,8 +43,6 @@ class DemoController extends Controller {
     }
 
     public function reportAffair(Request $request) {
-        return $request->all();
-
         $valid = $request->validate([
             'victim_relationship_id' => 'required|integer|exists:relationships,id',
             'cheater_id' => 'required|integer|exists:characters,id',
@@ -56,6 +55,6 @@ class DemoController extends Controller {
             $valid['affair_partner_id'],
         ]);
 
-        return back();
+        return Affair::latest()->firstOrFail();
     }
 }
