@@ -37,16 +37,14 @@ const columns: ColumnDef<Actor>[] = [
             <DataTableColumnHeader column={column} title="Character" />
         ),
         cell: ({ row }) => {
+            if (row.original.characters.length === 0) return 'N/A';
             const character = `${row.original.characters[0].first_name} ${row.original.characters[0].last_name}`;
-            return (
-                <DataTableLinkCell
-                    icon={<UsersIcon />}
-                    label={character}
-                    editRoute={
-                        characters.edit(row.original.characters[0].id).url
-                    }
-                />
-            );
+            return;
+            <DataTableLinkCell
+                icon={<UsersIcon />}
+                label={character}
+                editRoute={characters.edit(row.original.characters[0].id).url}
+            />;
         },
     },
     {
