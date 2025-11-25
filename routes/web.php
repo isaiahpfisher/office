@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::controller(ChatController::class)->group(function () {
-    Route::get('/chat', 'index')->name('chat.index');
+    Route::get('/', 'index')->name('chat.index');
 });
 
 Route::controller(DemoController::class)->group(function () {
