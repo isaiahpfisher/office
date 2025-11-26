@@ -67,8 +67,10 @@ export default function RunnableCode({
 
         axios(config)
             .then((res) => {
-                console.log(res);
-                setData(res.data);
+                const responseData = res.data;
+                setData(
+                    Array.isArray(responseData) ? responseData : [responseData],
+                );
             })
             .catch((error) => {
                 console.error('Failed to run code:', error);
