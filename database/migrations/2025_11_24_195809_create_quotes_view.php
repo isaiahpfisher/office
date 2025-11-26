@@ -8,7 +8,7 @@ return new class extends Migration {
      * Run the migrations.
      */
     public function up(): void {
-        DB::statement('CREATE VIEW quotes_view AS SELECT id, quote FROM quotes');
+        DB::statement('CREATE OR REPLACE VIEW quotes_view AS SELECT id, quote FROM quotes');
     }
 
     /**
