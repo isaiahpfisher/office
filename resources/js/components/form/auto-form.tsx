@@ -504,6 +504,7 @@ function DateField({
                     selected={value ?? undefined}
                     captionLayout="dropdown"
                     onSelect={(date) => onChange(date ?? null)}
+                    defaultMonth={value ?? undefined}
                     initialFocus
                 />
             </PopoverContent>
