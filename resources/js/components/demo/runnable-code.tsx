@@ -67,6 +67,7 @@ export default function RunnableCode({
 
         axios(config)
             .then((res) => {
+                console.log(res);
                 setData(res.data);
             })
             .catch((error) => {

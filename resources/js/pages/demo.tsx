@@ -30,7 +30,6 @@ export default function Demo({
                 language: 'php',
                 filename: 'DemoController@allQuotes()',
                 code: `public function allQuotes(): Collection {
-        }
     return Quote::all();
 }`,
             },
