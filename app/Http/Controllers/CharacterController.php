@@ -32,7 +32,6 @@ class CharacterController extends Controller {
         $valid = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'sex' => 'required|in:Male,Female',
             'actor_id' => 'required|exists:actors,id',
             'department_id' => 'required|exists:departments,id',
         ]);
@@ -40,7 +39,6 @@ class CharacterController extends Controller {
         Character::create([
             'first_name' => $valid['first_name'],
             'last_name' => $valid['last_name'],
-            'sex' => $valid['sex'],
             'actor_id' => $valid['actor_id'],
             'department_id' => $valid['department_id'],
         ]);
@@ -86,7 +84,6 @@ class CharacterController extends Controller {
         $valid = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'sex' => 'required|in:Male,Female',
             'actor_id' => 'required|exists:actors,id',
             'department_id' => 'required|exists:departments,id',
         ]);
@@ -94,7 +91,6 @@ class CharacterController extends Controller {
         $character->update([
             'first_name' => $valid['first_name'],
             'last_name' => $valid['last_name'],
-            'sex' => $valid['sex'],
             'actor_id' => $valid['actor_id'],
             'department_id' => $valid['department_id'],
         ]);

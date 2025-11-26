@@ -33,12 +33,6 @@ const columns: ColumnDef<Character>[] = [
         ),
     },
     {
-        accessorKey: 'sex',
-        header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Sex" />
-        ),
-    },
-    {
         accessorKey: 'department',
         header: ({ column }) => (
             <DataTableColumnHeader column={column} title="Department" />

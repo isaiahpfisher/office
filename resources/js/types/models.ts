@@ -13,7 +13,6 @@ export type Actor = {
 export type Character = {
     first_name: string;
     last_name: string;
-    sex: 'Male' | 'Female';
     actor_id: string;
     department_id: string;
     actor: Actor;

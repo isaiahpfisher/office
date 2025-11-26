@@ -17,7 +17,6 @@ import CharactersThingsSheSaid from './things-she-said';
 const schema = z.object({
     first_name: z.string(),
     last_name: z.string(),
-    sex: z.enum(['Male', 'Female']),
     actor_id: z.number(),
     department_id: z.number(),
 });
@@ -92,19 +91,6 @@ export default function CharactersEdit({
                                         name: 'last_name',
                                         label: 'Last Name',
                                         placeholder: 'Doe',
-                                    },
-                                    {
-                                        type: 'select',
-                                        name: 'sex',
-                                        label: 'Sex',
-                                        placeholder: 'Choose an option',
-                                        options: [
-                                            { label: 'Male', value: 'Male' },
-                                            {
-                                                label: 'Female',
-                                                value: 'Female',
-                                            },
-                                        ],
                                     },
                                     {
                                         type: 'select',
