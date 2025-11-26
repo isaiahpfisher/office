@@ -30,7 +30,7 @@ class SeasonController extends Controller {
             'number' => ['required', 'numeric', Rule::unique('seasons', 'number')],
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'overview' => 'required|max:255',
+            'overview' => 'required',
         ]);
 
         Season::create([
@@ -65,7 +65,7 @@ class SeasonController extends Controller {
             'number' => ['required', 'numeric', Rule::unique('seasons', 'number')->ignore($season->id)],
             'start_date' => 'required|date',
             'end_date' => 'required|date',
-            'overview' => 'required|max:255',
+            'overview' => 'required',
         ]);
 
         $season->update([
