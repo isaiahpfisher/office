@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->timestamps();
             $table->foreignIdFor(Relationship::class, 'cheating_id')->constrained()->onDelete('cascade');
             $table->foreignIdFor(Relationship::class, 'cheated_id')->constrained()->onDelete('cascade');
+
+            $table->unique(['cheating_id', 'cheated_id']);
         });
     }
 
