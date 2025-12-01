@@ -14,7 +14,7 @@ class EpisodeController extends Controller {
      * Display a listing of the resource.
      */
     public function index() {
-        return Inertia::render('episodes/index', ['data' => Episode::with(["season", 'coldOpen'])->get()]);
+        return Inertia::render('episodes/index', ['data' => Episode::with(["season", 'coldOpen'])->orderBy('air_date')->get()]);
     }
 
     /**
