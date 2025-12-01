@@ -1,0 +1,746 @@
+[
+    {
+        "episode_id": 1,
+        "description": "Michael introduces the documentary crew to the office and pretends to be on a call with a big client."
+    },
+    {
+        "episode_id": 2,
+        "description": "Michael reenacts a Chris Rock comedy routine, offending the office."
+    },
+    {
+        "episode_id": 3,
+        "description": "Michael tasks Dwight with picking a healthcare plan while he tries to avoid the responsibility."
+    },
+    {
+        "episode_id": 4,
+        "description": "Michael tries to boost morale by joking about downsizing, which backfires immediately."
+    },
+    {
+        "episode_id": 5,
+        "description": "Michael prepares for the basketball game, convinced he will dominate the warehouse staff."
+    },
+    {
+        "episode_id": 6,
+        "description": "Michael frantically cleans the office to impress the purse girl."
+    },
+    {
+        "episode_id": 7,
+        "description": "Michael raps 'The Scarn' (from Threat Level Midnight) in his office."
+    },
+    {
+        "episode_id": 8,
+        "description": "Michael forwards inappropriate emails to the staff and gets in trouble with the IT guy."
+    },
+    {
+        "episode_id": 9,
+        "description": "Michael leaves early to sign papers for his condo, leaving the office unsupervised."
+    },
+    {
+        "episode_id": 10,
+        "description": "Ryan tries to do business school work at his desk while Michael distracts him."
+    },
+    {
+        "episode_id": 11,
+        "description": "Michael struggles with the decision of whom to fire on Halloween."
+    },
+    {
+        "episode_id": 12,
+        "description": "Jim moves Dwight's desk into the men's restroom."
+    },
+    {
+        "episode_id": 13,
+        "description": "The staff discovers Michael's screenplay, 'Threat Level Midnight'."
+    },
+    {
+        "episode_id": 14,
+        "description": "Jim pops Dwight's fitness orb with a pair of scissors."
+    },
+    {
+        "episode_id": 15,
+        "description": "Michael spots a man in a turban (the IT guy) and suspects he is a terrorist."
+    },
+    {
+        "episode_id": 16,
+        "description": "Michael gets a Christmas tree that is far too large for the office."
+    },
+    {
+        "episode_id": 17,
+        "description": "Michael packs for the booze cruise and practices his dance moves."
+    },
+    {
+        "episode_id": 18,
+        "description": "Michael burns his foot on a George Foreman grill."
+    },
+    {
+        "episode_id": 19,
+        "description": "Dwight investigates whether Oscar is actually sick or playing hooky."
+    },
+    {
+        "episode_id": 20,
+        "description": "Ryan works at the reception desk while Pam is on vacation."
+    },
+    {
+        "episode_id": 21,
+        "description": "Jan arrives at the office for the 'Women in the Workplace' seminar."
+    },
+    {
+        "episode_id": 22,
+        "description": "Michael goes to corporate in New York and accidentally reveals he slept with Jan."
+    },
+    {
+        "episode_id": 23,
+        "description": "Jim conditions Dwight to ask for an Altoid every time his computer restarts."
+    },
+    {
+        "episode_id": 24,
+        "description": "Michael shows a video of his childhood appearance on a puppet show."
+    },
+    {
+        "episode_id": 25,
+        "description": "Michael waits excitedly for donuts on his birthday."
+    },
+    {
+        "episode_id": 26,
+        "description": "Dwight investigates a half-smoked joint found in the parking lot."
+    },
+    {
+        "episode_id": 27,
+        "description": "Michael reads aloud from the conflict resolution complaints file."
+    },
+    {
+        "episode_id": 28,
+        "description": "Michael talks about the importance of charity for Casino Night."
+    },
+    {
+        "episode_id": 29,
+        "description": "Jim deals with the fallout of transferring to Stamford."
+    },
+    {
+        "episode_id": 30,
+        "description": "Michael prepares for the convention in Philadelphia."
+    },
+    {
+        "episode_id": 31,
+        "description": "The office has 'Movie Monday' and watches 'Varsity Blues'."
+    },
+    {
+        "episode_id": 32,
+        "description": "Michael learns about the death of his former boss, Ed Truck."
+    },
+    {
+        "episode_id": 33,
+        "description": "Dwight listens to 'Everybody Hurts' in his car."
+    },
+    {
+        "episode_id": 34,
+        "description": "Ryan tries to save his shoes from the melting asphalt."
+    },
+    {
+        "episode_id": 35,
+        "description": "Jim sends faxes to Dwight pretending to be 'Future Dwight'."
+    },
+    {
+        "episode_id": 36,
+        "description": "Andy Bernard introduces himself to the Scranton branch by singing."
+    },
+    {
+        "episode_id": 37,
+        "description": "Michael returns from the managers' retreat with 'news' about the merger."
+    },
+    {
+        "episode_id": 38,
+        "description": "Michael rides his old bicycle into the office for Christmas."
+    },
+    {
+        "episode_id": 39,
+        "description": "Michael is in a great mood after returning from Jamaica."
+    },
+    {
+        "episode_id": 40,
+        "description": "Jim pranks Michael by making his computer call him 'Boobz'."
+    },
+    {
+        "episode_id": 41,
+        "description": "Andy annoys everyone in the office with his ringtone."
+    },
+    {
+        "episode_id": 42,
+        "description": "Michael asks Jim about the bachelor party strippers."
+    },
+    {
+        "episode_id": 43,
+        "description": "Michael discusses his critical role in Phyllis's wedding."
+    },
+    {
+        "episode_id": 44,
+        "description": "Michael throws candy bars at Ryan's business school class."
+    },
+    {
+        "episode_id": 45,
+        "description": "Michael performs a magic trick with a straitjacket."
+    },
+    {
+        "episode_id": 46,
+        "description": "Roy attacks Jim in the office, and Dwight pepper sprays him."
+    },
+    {
+        "episode_id": 47,
+        "description": "Michael and Dwight bet on how many jellybeans are in a jar."
+    },
+    {
+        "episode_id": 48,
+        "description": "Jim impersonates Dwight. Bears. Beets. Battlestar Galactica."
+    },
+    {
+        "episode_id": 49,
+        "description": "Dwight punishes Jim for being late."
+    },
+    {
+        "episode_id": 50,
+        "description": "Michael asks the staff who would be the best replacement for him."
+    },
+    {
+        "episode_id": 51,
+        "description": "Michael gets a haircut before his interview at corporate."
+    },
+    {
+        "episode_id": 52,
+        "description": "Michael hits Meredith with his car in the parking lot."
+    },
+    {
+        "episode_id": 53,
+        "description": "Michael complains about ageism in the workplace."
+    },
+    {
+        "episode_id": 54,
+        "description": "The office is captivated by the DVD logo bouncing around the TV screen."
+    },
+    {
+        "episode_id": 55,
+        "description": "Michael watches 'The Devil Wears Prada' and acts like Meryl Streep."
+    },
+    {
+        "episode_id": 56,
+        "description": "Michael pitches his own ideas for the Dunder Mifflin commercial."
+    },
+    {
+        "episode_id": 57,
+        "description": "The Finer Things Club holds a meeting."
+    },
+    {
+        "episode_id": 58,
+        "description": "Michael misunderstands that it is Ryan's birthday, not his own."
+    },
+    {
+        "episode_id": 59,
+        "description": "Darryl beats Jim at ping pong, and Kelly trash talks Pam."
+    },
+    {
+        "episode_id": 60,
+        "description": "Michael tricks Jim and Pam into coming over for a dinner party."
+    },
+    {
+        "episode_id": 61,
+        "description": "Kevin and Andy fight to get their parking spaces back."
+    },
+    {
+        "episode_id": 62,
+        "description": "Michael gets gum stuck in his hair."
+    },
+    {
+        "episode_id": 63,
+        "description": "Michael puts his face in wet cement outside the office."
+    },
+    {
+        "episode_id": 64,
+        "description": "Jim tries to sell to a client on the golf course."
+    },
+    {
+        "episode_id": 65,
+        "description": "Michael sings 'Goodbye Toby' to the tune of 'Goodbye Stranger'."
+    },
+    {
+        "episode_id": 66,
+        "description": "The office weighs in for the corporate weight loss challenge."
+    },
+    {
+        "episode_id": 67,
+        "description": "Jim times Dwight to see how much company time he steals."
+    },
+    {
+        "episode_id": 68,
+        "description": "Dwight tests the durability of Jan's stroller."
+    },
+    {
+        "episode_id": 69,
+        "description": "Michael discovers the office has been robbed."
+    },
+    {
+        "episode_id": 70,
+        "description": "Three people dress up as the Joker for Halloween."
+    },
+    {
+        "episode_id": 71,
+        "description": "Michael pranks Holly with a fake marriage proposal."
+    },
+    {
+        "episode_id": 72,
+        "description": "Michael is excited about the international concierge in Winnipeg."
+    },
+    {
+        "episode_id": 73,
+        "description": "Michael screams 'NO GOD PLEASE NO' when he sees Toby is back."
+    },
+    {
+        "episode_id": 74,
+        "description": "Michael chokes on tiramisu."
+    },
+    {
+        "episode_id": 75,
+        "description": "Jim wraps Dwight's desk and chair in wrapping paper."
+    },
+    {
+        "episode_id": 76,
+        "description": "Michael runs past the speed radar to beat the office record."
+    },
+    {
+        "episode_id": 77,
+        "description": "Dwight follows a red wire from his computer to the telephone pole."
+    },
+    {
+        "episode_id": 78,
+        "description": "Dwight stages a fire drill that causes mass panic and Stanley's heart attack."
+    },
+    {
+        "episode_id": 79,
+        "description": "Michael prepares for his lecture circuit tour."
+    },
+    {
+        "episode_id": 80,
+        "description": "Dwight and Jim forgot Kelly's birthday."
+    },
+    {
+        "episode_id": 81,
+        "description": "Michael tries to act like a telemarketer."
+    },
+    {
+        "episode_id": 82,
+        "description": "Michael does a 'Knock Knock' KGB joke with Dwight."
+    },
+    {
+        "episode_id": 83,
+        "description": "Michael prepares for his 15th anniversary party."
+    },
+    {
+        "episode_id": 84,
+        "description": "Michael gets drunk and crawls around the office after quitting."
+    },
+    {
+        "episode_id": 85,
+        "description": "Kevin struggles to transfer calls as the new receptionist."
+    },
+    {
+        "episode_id": 86,
+        "description": "Michael, Pam, and Ryan toss cheese puffs into each other's mouths."
+    },
+    {
+        "episode_id": 87,
+        "description": "Dwight spins a sign for Michael Scott Paper Company."
+    },
+    {
+        "episode_id": 88,
+        "description": "Michael wakes up early to make deliveries for his new company."
+    },
+    {
+        "episode_id": 89,
+        "description": "Kevin brings in his famous chili and spills it all over the carpet."
+    },
+    {
+        "episode_id": 90,
+        "description": "Michael tries to get the office to dance in his disco cafe."
+    },
+    {
+        "episode_id": 91,
+        "description": "Michael falls asleep at his desk after eating a chicken pot pie."
+    },
+    {
+        "episode_id": 92,
+        "description": "Michael, Dwight, and Andy attempt 'Parkour' around the office."
+    },
+    {
+        "episode_id": 93,
+        "description": "Michael asks Oscar for advice on his colonoscopy."
+    },
+    {
+        "episode_id": 94,
+        "description": "Jim and Michael announce they are Co-Managers."
+    },
+    {
+        "episode_id": 95,
+        "description": "Pam's morning sickness causes a chain reaction of vomiting in the office."
+    },
+    {
+        "episode_id": 96,
+        "description": "Oscar tries to do a stereotypical Italian voice."
+    },
+    {
+        "episode_id": 97,
+        "description": "Michael introduces 'Blind Guy McSqueezy'."
+    },
+    {
+        "episode_id": 98,
+        "description": "The office turns the warehouse into a haunted house for children."
+    },
+    {
+        "episode_id": 99,
+        "description": "Dwight tries to rally the office with bagels."
+    },
+    {
+        "episode_id": 100,
+        "description": "Dwight fights himself in a martial arts demonstration."
+    },
+    {
+        "episode_id": 101,
+        "description": "Dwight introduces his 'Recyclops' character."
+    },
+    {
+        "episode_id": 102,
+        "description": "Andy and Michael talk baby talk to each other."
+    },
+    {
+        "episode_id": 103,
+        "description": "Michael waits impatiently for the Christmas tree."
+    },
+    {
+        "episode_id": 104,
+        "description": "Michael introduces 'Computron', a fake AI assistant."
+    },
+    {
+        "episode_id": 105,
+        "description": "Christian Slater explains the Sabre orientation in a video."
+    },
+    {
+        "episode_id": 106,
+        "description": "Michael calls the Olympic committee to clarify his reservation."
+    },
+    {
+        "episode_id": 107,
+        "description": "Dwight inspects Jim and Pam's house for mold."
+    },
+    {
+        "episode_id": 108,
+        "description": "Meredith arrives at the office on St. Patrick's Day."
+    },
+    {
+        "episode_id": 109,
+        "description": "Michael dives into a dumpster to find the new leads."
+    },
+    {
+        "episode_id": 110,
+        "description": "Michael does pushups to impress the office."
+    },
+    {
+        "episode_id": 111,
+        "description": "Kevin is forced to eat broccoli."
+    },
+    {
+        "episode_id": 112,
+        "description": "Michael tries to learn Spanish from audio tapes."
+    },
+    {
+        "episode_id": 113,
+        "description": "Jim and Pam communicate using Morse code to mess with Dwight."
+    },
+    {
+        "episode_id": 114,
+        "description": "Michael discusses his affair with the office."
+    },
+    {
+        "episode_id": 115,
+        "description": "Michael releases a video statement about the printer fires."
+    },
+    {
+        "episode_id": 116,
+        "description": "The office performs a Lip Dub to 'Nobody But Me'."
+    },
+    {
+        "episode_id": 117,
+        "description": "Dwight reenacts 'Pretty Woman' at the mall."
+    },
+    {
+        "episode_id": 118,
+        "description": "Andy sings a song about his play."
+    },
+    {
+        "episode_id": 119,
+        "description": "Dwight opens a daycare center in the building."
+    },
+    {
+        "episode_id": 120,
+        "description": "Oscar shows off his new bicycle."
+    },
+    {
+        "episode_id": 121,
+        "description": "The office tests what Stanley will and won't notice."
+    },
+    {
+        "episode_id": 122,
+        "description": "Dwight eats all the dried peaches at his desk."
+    },
+    {
+        "episode_id": 123,
+        "description": "The office watches the Scranton Strangler chase on TV."
+    },
+    {
+        "episode_id": 124,
+        "description": "Ryan tries to pitch WUPHF.com to the office."
+    },
+    {
+        "episode_id": 125,
+        "description": "Dwight attempts to use his feet for everyday tasks."
+    },
+    {
+        "episode_id": 126,
+        "description": "Jim and Dwight have a snowball fight."
+    },
+    {
+        "episode_id": 127,
+        "description": "Jim discovers Dwight's 'Knights of the Night' patrol group."
+    },
+    {
+        "episode_id": 128,
+        "description": "Michael meets David Brent (Ricky Gervais) outside the elevator."
+    },
+    {
+        "episode_id": 129,
+        "description": "Michael gets stranded at a gas station."
+    },
+    {
+        "episode_id": 130,
+        "description": "Darryl receives a condolence card for his grandmother."
+    },
+    {
+        "episode_id": 131,
+        "description": "Michael reviews the script for 'Threat Level Midnight'."
+    },
+    {
+        "episode_id": 132,
+        "description": "Todd Packer brings cupcakes to the office."
+    },
+    {
+        "episode_id": 133,
+        "description": "Michael tries to propose to Holly with fire."
+    },
+    {
+        "episode_id": 134,
+        "description": "Michael waits at a bar for his replacement, Deangelo Vickers."
+    },
+    {
+        "episode_id": 135,
+        "description": "Michael delivers the Dundie nominations to the staff."
+    },
+    {
+        "episode_id": 136,
+        "description": "Michael sits on the roof of the building."
+    },
+    {
+        "episode_id": 137,
+        "description": "Deangelo Vickers performs a juggling routine without balls."
+    },
+    {
+        "episode_id": 138,
+        "description": "Dwight leads the office in the Pledge of Allegiance."
+    },
+    {
+        "episode_id": 139,
+        "description": "Creed Bratton acts as the manager."
+    },
+    {
+        "episode_id": 140,
+        "description": "The office engages in 'Planking' around the workspace."
+    },
+    {
+        "episode_id": 141,
+        "description": "Kevin saves time by speaking in shorthand ('Why say lot word when few word do trick?')."
+    },
+    {
+        "episode_id": 142,
+        "description": "The warehouse crew wins the lottery."
+    },
+    {
+        "episode_id": 143,
+        "description": "Dwight puts up billboards for Schrute Farms."
+    },
+    {
+        "episode_id": 144,
+        "description": "Erin struggles with her Halloween costume."
+    },
+    {
+        "episode_id": 145,
+        "description": "Dwight explains the 'Doomsday Device'."
+    },
+    {
+        "episode_id": 146,
+        "description": "Dwight grabs Pam's crotch thinking she is wearing an iPod."
+    },
+    {
+        "episode_id": 147,
+        "description": "The office prepares for the trip to Gettysburg."
+    },
+    {
+        "episode_id": 148,
+        "description": "Dwight opens a gym in the building."
+    },
+    {
+        "episode_id": 149,
+        "description": "Erin gets drunk at the Christmas party."
+    },
+    {
+        "episode_id": 150,
+        "description": "The office plays the 'Silent Game' to see who can be quiet the longest."
+    },
+    {
+        "episode_id": 151,
+        "description": "Jim fills Dwight's desk with meatballs."
+    },
+    {
+        "episode_id": 152,
+        "description": "Jim returns from jury duty."
+    },
+    {
+        "episode_id": 153,
+        "description": "Dwight suffers from appendicitis."
+    },
+    {
+        "episode_id": 154,
+        "description": "Dwight wakes up the team in Florida."
+    },
+    {
+        "episode_id": 155,
+        "description": "Dwight and Packer compete for the VP position."
+    },
+    {
+        "episode_id": 156,
+        "description": "Dwight prepares the team for the store opening."
+    },
+    {
+        "episode_id": 157,
+        "description": "Jim tries to warn Dwight about the store firing."
+    },
+    {
+        "episode_id": 158,
+        "description": "Nellie arrives and takes the manager's chair."
+    },
+    {
+        "episode_id": 159,
+        "description": "The office is forced to throw a party for Nellie."
+    },
+    {
+        "episode_id": 160,
+        "description": "Andy returns and finds Nellie in his office."
+    },
+    {
+        "episode_id": 161,
+        "description": "Andy crashes the fundraiser."
+    },
+    {
+        "episode_id": 162,
+        "description": "Jim and Dwight race to steal a client."
+    },
+    {
+        "episode_id": 163,
+        "description": "Dwight sets up a portrait studio."
+    },
+    {
+        "episode_id": 164,
+        "description": "Kevin tries to fix a turtle he ran over."
+    },
+    {
+        "episode_id": 165,
+        "description": "Pam creates a 'Chore Wheel' for the office."
+    },
+    {
+        "episode_id": 166,
+        "description": "Jim and Pam hire an actor friend (Randall Park) to pretend to be 'Asian Jim'."
+    },
+    {
+        "episode_id": 167,
+        "description": "Dwight makes popcorn on the work bus."
+    },
+    {
+        "episode_id": 168,
+        "description": "Dwight gets his head stuck in a carved pumpkin."
+    },
+    {
+        "episode_id": 169,
+        "description": "Andy learns his family has lost their fortune."
+    },
+    {
+        "episode_id": 170,
+        "description": "The men of the office grow mustaches for Movember."
+    },
+    {
+        "episode_id": 171,
+        "description": "Angela asks Dwight to do a favor for her."
+    },
+    {
+        "episode_id": 172,
+        "description": "Dwight prepares for a Pennsylvania Dutch Christmas."
+    },
+    {
+        "episode_id": 173,
+        "description": "Jim bites his lip repeatedly."
+    },
+    {
+        "episode_id": 174,
+        "description": "Darryl interviews for a job in Philadelphia."
+    },
+    {
+        "episode_id": 175,
+        "description": "Jim tries to leave for his daughter's recital."
+    },
+    {
+        "episode_id": 176,
+        "description": "Dwight interviews his friends for a job."
+    },
+    {
+        "episode_id": 177,
+        "description": "Pam finds her mural vandalized."
+    },
+    {
+        "episode_id": 178,
+        "description": "The couples try to fake arguments to get a discount."
+    },
+    {
+        "episode_id": 179,
+        "description": "Andy returns from his boat trip."
+    },
+    {
+        "episode_id": 180,
+        "description": "Dwight throws dirt into his siblings' faces at a funeral."
+    },
+    {
+        "episode_id": 181,
+        "description": "Phyllis listens to '50 Shades of Grey' audio book."
+    },
+    {
+        "episode_id": 182,
+        "description": "Dwight shoots Stanley with a bull tranquilizer."
+    },
+    {
+        "episode_id": 183,
+        "description": "The office competes in a paper airplane contest."
+    },
+    {
+        "episode_id": 184,
+        "description": "Andy quits his job to pursue acting."
+    },
+    {
+        "episode_id": 185,
+        "description": "Dwight tests his new assistant."
+    },
+    {
+        "episode_id": 186,
+        "description": "The documentary crew returns one year later."
+    }
+]

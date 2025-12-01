@@ -41,6 +41,7 @@ interface DataTableProps<TData, TValue> {
     createRoute: string;
     createAction?: () => void;
     getEditRoute?: (id: number) => string;
+    blur?: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -51,6 +52,7 @@ export function DataTable<TData, TValue>({
     createRoute,
     createAction,
     getEditRoute,
+    blur = false,
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [globalFilter, setGlobalFilter] = useState('');
@@ -165,6 +167,9 @@ export function DataTable<TData, TValue>({
                         ))}
                     </TableHeader>
                     <TableBody>
+                        {blur && (
+                            <div className="absolute h-full w-full bg-zinc-100/25 backdrop-blur-[3px] dark:bg-zinc-800/25" />
+                        )}
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map((row) => (
                                 <TableRow

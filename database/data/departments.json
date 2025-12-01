@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "title": "Sales"
+    },
+    {
+        "id": 2,
+        "title": "Accounting"
+    },
+    {
+        "id": 3,
+        "title": "Management"
+    },
+    {
+        "id": 4,
+        "title": "Customer Service"
+    },
+    {
+        "id": 5,
+        "title": "Warehouse"
+    },
+    {
+        "id": 6,
+        "title": "Corporate"
+    },
+    {
+        "id": 7,
+        "title": "Reception"
+    },
+    {
+        "id": 8,
+        "title": "Other"
+    },
+    {
+        "id": 9,
+        "title": "Quality Control"
+    },
+    {
+        "id": 10,
+        "title": "Human Resources"
+    }
+]

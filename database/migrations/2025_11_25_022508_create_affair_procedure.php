@@ -5,6 +5,15 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration {
     /**
+     * Determine if the migration should run.
+     *
+     * @return bool
+     */
+    public function shouldRun(): bool {
+        return app()->environment('production');
+    }
+
+    /**
      * Run the migrations.
      */
     public function up(): void {

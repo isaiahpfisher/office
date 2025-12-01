@@ -1,0 +1,57 @@
+[
+    {
+        "person_one_id": 2,
+        "person_two_id": 3,
+        "outcome": "Marriage"
+    },
+    {
+        "person_one_id": 1,
+        "person_two_id": 6,
+        "outcome": "Marriage"
+    },
+    {
+        "person_one_id": 8,
+        "person_two_id": 25,
+        "outcome": "Marriage"
+    },
+    {
+        "person_one_id": 14,
+        "person_two_id": 19,
+        "outcome": "Break Up"
+    },
+    {
+        "person_one_id": 14,
+        "person_two_id": 26,
+        "outcome": "Marriage"
+    },
+    {
+        "person_one_id": 3,
+        "person_two_id": 22,
+        "outcome": "Break Up"
+    },
+    {
+        "person_one_id": 2,
+        "person_two_id": 23,
+        "outcome": "Break Up"
+    },
+    {
+        "person_one_id": 13,
+        "person_two_id": 6,
+        "outcome": "Break Up"
+    },
+    {
+        "person_one_id": 13,
+        "person_two_id": 17,
+        "outcome": "Break Up"
+    },
+    {
+        "person_one_id": 18,
+        "person_two_id": 17,
+        "outcome": "Break Up"
+    },
+    {
+        "person_one_id": 11,
+        "person_two_id": 12,
+        "outcome": "Other"
+    }
+]

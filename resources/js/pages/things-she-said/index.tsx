@@ -70,18 +70,23 @@ const columns: ColumnDef<ThingSheSaid>[] = [
 
 export default function ThingsSheSaidIndex({ data }: { data: ThingSheSaid[] }) {
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Things She Said" />
-            <div className="h-full p-6">
-                <DataTable
-                    title="Things She Said"
-                    description="Browse things she said from the show."
-                    columns={columns}
-                    data={data}
-                    createRoute={thingsSheSaid.create().url}
-                    getEditRoute={(id: number) => thingsSheSaid.edit(id).url}
-                />
-            </div>
-        </AppLayout>
+        <>
+            <AppLayout breadcrumbs={breadcrumbs}>
+                <Head title="Things She Said" />
+                <div className="h-full p-6">
+                    <DataTable
+                        title="Things She Said"
+                        description="Browse things she said from the show."
+                        columns={columns}
+                        data={data}
+                        createRoute={thingsSheSaid.create().url}
+                        getEditRoute={(id: number) =>
+                            thingsSheSaid.edit(id).url
+                        }
+                        blur={true}
+                    />
+                </div>
+            </AppLayout>
+        </>
     );
 }
