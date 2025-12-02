@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Episode;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
@@ -9,6 +10,8 @@ class DatabaseSeeder extends Seeder {
      * Seed the application's database.
      */
     public function run(): void {
+        // $this->call(IndexSeeder::class);
+
         $this->call(SeasonSeeder::class);
         $this->call(DepartmentSeeder::class);
         $this->call(ActorCharacterSeeder::class);

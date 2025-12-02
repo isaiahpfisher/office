@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('episodes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title');
+            $table->string('title')->index();
             $table->text('summary');
             $table->date('air_date')->index();
             $table->foreignIdFor(Season::class)->constrained()->onDelete('cascade');
