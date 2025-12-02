@@ -22,6 +22,7 @@ use Inertia\Inertia;
 
 Route::controller(ChatController::class)->group(function () {
     Route::get('/', 'index')->name('chat.index');
+    Route::get('/answer', 'response')->name('chat.response');
 });
 
 Route::controller(DemoController::class)->group(function () {
