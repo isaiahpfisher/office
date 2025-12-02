@@ -9,54 +9,112 @@ use Illuminate\Support\Facades\Log;
 class GeminiDatabaseService {
     protected string $apiKey;
     protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+    protected int $maxIterations = 10;
 
     public function __construct(string $apiKey) {
         $this->apiKey = $apiKey;
     }
 
-    public function ask(string $userQuestion): array {
-        $rawSql = $this->getSqlFromQuestion($userQuestion);
-        $cleanSql = trim(str_replace(['```sql', '```'], '', $rawSql));
-        $queryResult = $this->executeQuery($cleanSql);
-        $naturalLanguage = $this->getNaturalLanguageResponse($userQuestion, $queryResult);
+    public function ask(string $currentQuestion, array $history): array {
+        $conversationContext = $this->buildConversationTranscript($history, $currentQuestion);
+
+        $iteration = 0;
+        $allExecutedSql = [];
+
+        while ($iteration < $this->maxIterations) {
+            $iteration++;
+
+            $response = $this->callGemini($conversationContext);
+
+            // Use the new helper to clean and validate SQL
+            $sql = $this->extractSql($response);
+
+            if ($sql) {
+                $allExecutedSql[] = $sql;
+                $queryResult = $this->executeQuery($sql);
+                $conversationContext .= "\n\nAssistant (SQL Action): " . $sql;
+                $conversationContext .= "\n\nSystem (Database Result): " . $queryResult;
+                continue;
+            } else {
+                return [
+                    'sql' => implode("\n\n-- Next Query --\n", $allExecutedSql),
+                    'answer' => $response
+                ];
+            }
+        }
 
         return [
-            'sql' => $cleanSql,
-            'answer' => $naturalLanguage
+            'sql' => implode("\n", $allExecutedSql),
+            'answer' => "I stopped after $this->maxIterations steps. I might be stuck in a loop."
         ];
     }
 
-    protected function getSqlFromQuestion(string $question): string {
-        $prompt = "Please create SQL and only SQL without the markdown based on this database schema\n" .
-            $this->getSchemaContext() .
-            "\nfrom this natural language question: " . $question;
+    protected function extractSql(string $text): ?string {
+        if (preg_match('/```sql\s*(.*?)\s*```/is', $text, $matches)) {
+            return trim($matches[1]);
+        }
 
-        return $this->callGemini($prompt);
+        $clean = trim(str_replace(['```sql', '```'], '', $text));
+
+        $clean = preg_replace('/^(SQL:|sql:)\s*/i', '', $clean);
+
+        if ($this->isSql($clean)) {
+            return $clean;
+        }
+
+        return null;
+    }
+
+    protected function buildConversationTranscript(array $history, string $currentQuestion): string {
+        $schema = $this->getSchemaContext();
+        $transcript = "You are a SQL expert and data analyst. Here is the database schema:\n$schema\n";
+        $transcript .= "\nINSTRUCTIONS:\n";
+        $transcript .= "1. If you need data, output ONLY the SQL query. Do not add markdown or explanations.\n";
+        $transcript .= "2. If you have the data needed to answer, output the natural language answer.\n";
+        $transcript .= "3. You can execute multiple queries sequentially if needed.\n";
+        $transcript .= "4. If you need more information from the user, ask a follow-up question. For example, if you're inserting into the DB and need to know the value for a column, ask.\n";
+
+        $transcript .= "\n--- CONVERSATION HISTORY ---\n";
+
+        foreach ($history as $msg) {
+            $role = ucfirst($msg['role']);
+            $content = $msg['content'];
+            $transcript .= "$role: $content\n";
+        }
+
+        $transcript .= "User: $currentQuestion\n";
+
+        return $transcript;
+    }
+
+    protected function isSql(string $text): bool {
+        $text = strtoupper(trim($text));
+        return str_starts_with($text, 'SELECT') ||
+            str_starts_with($text, 'UPDATE') ||
+            str_starts_with($text, 'DELETE') ||
+            str_starts_with($text, 'INSERT') ||
+            str_starts_with($text, 'SHOW') ||
+            str_starts_with($text, 'DESCRIBE');
     }
 
     protected function executeQuery(string $sql): string {
         try {
-            if (str_contains(strtolower($sql), 'select')) {
+            if (str_contains(strtolower($sql), 'select') || str_contains(strtolower($sql), 'show') || str_contains(strtolower($sql), 'describe')) {
                 $result = DB::select($sql);
-                return json_encode($result);
+                $json = json_encode($result);
+                return strlen($json) > 10000 ? substr($json, 0, 10000) . "...(truncated)" : $json;
             } elseif (str_contains(strtolower($sql), 'delete')) {
                 return (string) DB::delete($sql) . ' rows deleted.';
             } elseif (str_contains(strtolower($sql), 'update')) {
                 return (string) DB::update($sql) . ' rows updated.';
+            } elseif (str_contains(strtolower($sql), 'insert')) {
+                return (string) DB::insert($sql) ? 'Row inserted.' : 'Insert failed.';
             }
 
             return "No executable SQL found or unsupported operation.";
         } catch (\Exception $e) {
             return "SQL Error: " . $e->getMessage();
         }
-    }
-
-    protected function getNaturalLanguageResponse(string $originalQuestion, string $dataContext): string {
-        $prompt = "Turn this SQL query result into a natural language answer. " .
-            "Original Question: '$originalQuestion'. " .
-            "Data: $dataContext";
-
-        return $this->callGemini($prompt);
     }
 
     protected function callGemini(string $text): string {
@@ -68,7 +126,7 @@ class GeminiDatabaseService {
         ]);
 
         if ($response->successful()) {
-            return $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? 'No response text generated.';
+            return $response->json()['candidates'][0]['content']['parts'][0]['text'] ?? '';
         }
 
         Log::error('Gemini API Error', $response->json());
