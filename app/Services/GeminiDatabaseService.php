@@ -9,44 +9,42 @@ use Illuminate\Support\Facades\Log;
 class GeminiDatabaseService {
     protected string $apiKey;
     protected string $baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
-    protected int $maxIterations = 10;
 
     public function __construct(string $apiKey) {
         $this->apiKey = $apiKey;
     }
 
-    public function ask(string $currentQuestion, array $history): array {
-        $conversationContext = $this->buildConversationTranscript($history, $currentQuestion);
+    public function ask(string $question): array {
+        $prompt = $this->buildPrompt($question);
+        $response = $this->callGemini($prompt);
+        $sql = $this->extractSql($response);
 
-        $iteration = 0;
-        $allExecutedSql = [];
+        if ($sql) {
+            $data = $this->executeQuery($sql);
 
-        while ($iteration < $this->maxIterations) {
-            $iteration++;
-
-            $response = $this->callGemini($conversationContext);
-
-            // Use the new helper to clean and validate SQL
-            $sql = $this->extractSql($response);
-
-            if ($sql) {
-                $allExecutedSql[] = $sql;
-                $queryResult = $this->executeQuery($sql);
-                $conversationContext .= "\n\nAssistant (SQL Action): " . $sql;
-                $conversationContext .= "\n\nSystem (Database Result): " . $queryResult;
-                continue;
-            } else {
-                return [
-                    'sql' => implode("\n\n-- Next Query --\n", $allExecutedSql),
-                    'answer' => $response
-                ];
-            }
+            return [
+                'sql' => $sql,
+                'answer' => $this->generateNaturalLanguageAnswer($question, $data)
+            ];
         }
 
         return [
-            'sql' => implode("\n", $allExecutedSql),
-            'answer' => "I stopped after $this->maxIterations steps. I might be stuck in a loop."
+            'sql' => null,
+            'answer' => $response
         ];
+    }
+
+    protected function generateNaturalLanguageAnswer(string $question, string $data): string {
+        $prompt = <<<EOT
+The user asked: "$question"
+
+The database query returned this data:
+$data
+
+Based on this data, provide a concise, natural language answer to the user's question.
+EOT;
+
+        return $this->callGemini($prompt);
     }
 
     protected function extractSql(string $text): ?string {
@@ -55,35 +53,24 @@ class GeminiDatabaseService {
         }
 
         $clean = trim(str_replace(['```sql', '```'], '', $text));
-
         $clean = preg_replace('/^(SQL:|sql:)\s*/i', '', $clean);
 
-        if ($this->isSql($clean)) {
-            return $clean;
-        }
-
-        return null;
+        return $this->isSql($clean) ? $clean : null;
     }
 
-    protected function buildConversationTranscript(array $history, string $currentQuestion): string {
+    protected function buildPrompt(string $question): string {
         $schema = $this->getSchemaContext();
-        $transcript = "You are a SQL expert and data analyst. Here is the database schema:\n$schema\n";
-        $transcript .= "\nINSTRUCTIONS:\n";
-        $transcript .= "1. If you need data, output ONLY the SQL query. Do not add markdown or explanations.\n";
-        $transcript .= "2. If you have the data needed to answer, output the natural language answer.\n";
-        $transcript .= "3. You can execute multiple queries sequentially if needed.\n";
 
-        $transcript .= "\n--- CONVERSATION HISTORY ---\n";
+        return <<<EOT
+You are a SQL expert and data analyst. Here is the database schema:
+$schema
 
-        foreach ($history as $msg) {
-            $role = ucfirst($msg['role']);
-            $content = $msg['content'];
-            $transcript .= "$role: $content\n";
-        }
+INSTRUCTIONS:
+1. If you need data to answer the question, output ONLY the valid SQL query. Do not add markdown or explanations.
+2. If the question does not require data, answer it directly.
 
-        $transcript .= "User: $currentQuestion\n";
-
-        return $transcript;
+User Question: $question
+EOT;
     }
 
     protected function isSql(string $text): bool {

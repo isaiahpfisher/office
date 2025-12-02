@@ -33,7 +33,7 @@ class ChatController extends Controller {
 
         Session::put('history', $history);
 
-        $result = $geminiService->ask($question, $history);
+        $result = $geminiService->ask($question);
 
         $aiMessage = [
             'id' => (string) Str::uuid(),
