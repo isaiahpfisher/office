@@ -72,7 +72,6 @@ class GeminiDatabaseService {
         $transcript .= "1. If you need data, output ONLY the SQL query. Do not add markdown or explanations.\n";
         $transcript .= "2. If you have the data needed to answer, output the natural language answer.\n";
         $transcript .= "3. You can execute multiple queries sequentially if needed.\n";
-        $transcript .= "4. If you need more information from the user, ask a follow-up question. For example, if you're inserting into the DB and need to know the value for a column, ask.\n";
 
         $transcript .= "\n--- CONVERSATION HISTORY ---\n";
 
