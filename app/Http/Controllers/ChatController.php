@@ -28,10 +28,7 @@ class ChatController extends Controller {
             'created_at' => now()->toIso8601String(),
         ];
 
-        $history = Session::get('history', []);
-        $history[] = $userMessage;
-
-        Session::put('history', $history);
+        Session::push('history', $userMessage);
 
         $result = $geminiService->ask($question);
 
@@ -43,10 +40,9 @@ class ChatController extends Controller {
             'created_at' => now()->toIso8601String(),
         ];
 
-        $history[] = $aiMessage;
-        Session::put('history', $history);
+        Session::push('history', $aiMessage);
 
-        return $history;
+        return Session::get('history');
     }
 
     public function destroy(Request $request) {
